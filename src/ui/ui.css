@@ -140,3 +140,123 @@
     transition: none;
   }
 }
+
+/* Untere Tab-Leiste (Heute, Prognose, …) */
+.mit-tableiste {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 108px);
+}
+
+.tableiste {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 78px);
+  justify-content: space-evenly;
+  padding: 8px 6px calc(env(safe-area-inset-bottom) + 12px);
+  background: rgba(31, 30, 29, 0.97);
+  border-top: 1px solid var(--linie);
+}
+
+.tableiste__tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 48px;
+  border: 0;
+  background: none;
+  color: var(--text-gedaempft);
+  font-size: 11px;
+}
+
+.tableiste__tab--aktiv {
+  color: var(--akzent-text);
+}
+
+/* Eingabefeld mit Einheit, z. B. „€“ */
+.feld {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.feld__name {
+  font-size: 13.5px;
+  color: var(--text-zweitrangig);
+}
+
+.feld__eingabe {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--rand-eingabe);
+  background: var(--flaeche-eingabe);
+}
+
+.feld__eingabe:focus-within {
+  border-color: var(--akzent);
+}
+
+.feld__eingabe input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: var(--schrift-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color-scheme: dark;
+}
+
+.feld__eingabe input::placeholder {
+  color: var(--text-platzhalter);
+}
+
+.feld__einheit {
+  font-family: var(--schrift-serif);
+  font-size: 17px;
+  color: var(--text-gedaempft);
+}
+
+.feld__hilfe {
+  font-size: 12px;
+  color: var(--text-gedaempft);
+}
+
+/* Kleine Kachel mit Label und Zahl */
+.kachel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--rand);
+  background: var(--flaeche);
+  text-align: left;
+}
+
+.kachel__zahl {
+  font-family: var(--schrift-serif);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.gut {
+  color: var(--gut);
+}
+
+.hinweis {
+  color: var(--hinweis);
+}
+
+.warnung {
+  color: var(--warnung);
+}

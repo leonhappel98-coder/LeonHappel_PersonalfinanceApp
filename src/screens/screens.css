@@ -481,3 +481,351 @@
     animation: none;
   }
 }
+
+/* ---------- Ziel festlegen ---------- */
+
+.ziel__text {
+  font-size: 15px;
+  color: var(--text-gedaempft);
+}
+
+.ziel__formular {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ziel__formular .karte {
+  gap: 14px;
+}
+
+.ziel .fusszeile-knopf {
+  margin-bottom: 0;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
+}
+
+.ziel__daten {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 12px;
+}
+
+.ziel__loeschen {
+  color: var(--warnung);
+}
+
+/* ---------- Heute ---------- */
+
+.heute {
+  gap: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.heute__bogen {
+  position: absolute;
+  left: 50%;
+  top: -760px;
+  width: 910px;
+  height: 910px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(217, 119, 87, 0.55);
+  box-shadow: 0 12px 40px rgba(217, 119, 87, 0.22);
+  pointer-events: none;
+}
+
+.heute__titelblock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.heute__gruss {
+  font-size: 14px;
+  color: var(--text-gedaempft);
+}
+
+.heute__titel {
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.heute__aktionen {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.heute__einstellungen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 22px;
+  border: 1px solid var(--rand);
+  background: var(--flaeche);
+  color: var(--text-zweitrangig);
+}
+
+.heute__ziel {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+}
+
+.heute__ziel svg {
+  flex: 0 0 auto;
+}
+
+.heute__ring {
+  transition: stroke-dasharray 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.heute__ring-zahl {
+  font-family: var(--schrift-serif);
+  font-size: 26px;
+  font-weight: 600;
+  fill: var(--text);
+}
+
+.heute__ring-text {
+  font-family: var(--schrift-mono);
+  font-size: 11px;
+  fill: var(--text-gedaempft);
+}
+
+.heute__zahlen {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.heute__zahlen .label {
+  font-size: 11px;
+  letter-spacing: 1.4px;
+}
+
+.heute__vermoegen {
+  font-family: var(--schrift-serif);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.heute__zieltext,
+.heute__prognose {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.heute__zieltext {
+  color: var(--text-gedaempft);
+}
+
+.heute__kacheln {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.heute__kacheln .label {
+  letter-spacing: 1px;
+}
+
+.heute__auswertung {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* ---------- Prognose ---------- */
+
+.prognose {
+  gap: 14px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.prognose__szenarien {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  border: 1px solid var(--linie);
+  background: var(--flaeche);
+}
+
+.prognose__szenarien button {
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-gedaempft);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.prognose__szenarien button[aria-pressed='true'] {
+  border-color: var(--akzent);
+  background: var(--akzent-flaeche);
+  color: var(--akzent-text);
+  font-weight: 600;
+}
+
+.prognose__ergebnis {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.prognose__ergebnis .label {
+  font-size: 11px;
+  letter-spacing: 1.4px;
+}
+
+.prognose__monat {
+  font-family: var(--schrift-serif);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.prognose__abstand {
+  font-size: 13px;
+}
+
+.prognose__diagramm {
+  gap: 4px;
+  padding: 12px 8px 8px;
+}
+
+.diagramm {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.diagramm__achse {
+  font-family: var(--schrift-mono);
+  font-size: 10px;
+  fill: var(--text-gedaempft);
+}
+
+.diagramm__achse line {
+  stroke: var(--linie);
+}
+
+.diagramm__ziel {
+  stroke: var(--gut);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 5;
+}
+
+.diagramm__andere {
+  fill: none;
+  stroke: var(--text-gedaempft);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 4;
+}
+
+.diagramm__flaeche {
+  fill: rgba(217, 119, 87, 0.14);
+}
+
+.diagramm__gewaehlt {
+  fill: none;
+  stroke: var(--akzent);
+  stroke-width: 2.6;
+  stroke-linejoin: round;
+}
+
+.diagramm__heute {
+  fill: var(--text);
+  stroke: var(--hintergrund);
+  stroke-width: 2;
+}
+
+.diagramm__erreicht {
+  fill: var(--hintergrund);
+  stroke: var(--gut);
+  stroke-width: 2.4;
+}
+
+.diagramm__beschriftung {
+  font-family: var(--schrift-mono);
+  font-size: 10.5px;
+  fill: var(--text);
+}
+
+.diagramm__beschriftung--gut {
+  fill: var(--gut);
+}
+
+.prognose__legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  padding: 4px 8px 2px;
+  font-size: 12px;
+  color: var(--text-gedaempft);
+}
+
+.prognose__legende > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.prognose__legende-linie {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--akzent);
+}
+
+.prognose__legende-linie--gestrichelt {
+  height: 0;
+  border-top: 1.5px dashed var(--text-gedaempft);
+  background: none;
+}
+
+.prognose__legende-raute {
+  width: 9px;
+  height: 9px;
+  transform: rotate(45deg);
+  background: var(--text);
+}
+
+.prognose__kacheln {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.prognose__kacheln .kachel {
+  padding: 12px 14px;
+}
+
+.prognose__annahmen {
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.prognose__hinweis {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-gedaempft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heute__ring {
+    transition: none;
+  }
+}

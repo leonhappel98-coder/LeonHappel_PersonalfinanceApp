@@ -9,12 +9,15 @@ type Props = {
   analyse: Analyse
   schaetzung: number | null
   istDemo: boolean
+  /** Gibt es schon ein Ziel, führt der Knopf zurück zu „Heute“. */
+  hatZiel: boolean
+  onWeiter: () => void
   onNeu: () => void
 }
 
 const euro = (betrag: number) => formatEuro(betrag, 'ganz')
 
-export function Ergebnis({ analyse, schaetzung, istDemo, onNeu }: Props) {
+export function Ergebnis({ analyse, schaetzung, istDemo, hatZiel, onWeiter, onNeu }: Props) {
   const monate = Math.max(1, Math.round(analyse.zeitraum.monate))
   const groessteKategorie = Math.max(...analyse.kategorien.map((k) => k.proMonat), 1)
 
@@ -103,11 +106,10 @@ export function Ergebnis({ analyse, schaetzung, istDemo, onNeu }: Props) {
       )}
 
       <div className="fusszeile-knopf">
-        <button type="button" className="knopf" disabled aria-describedby="phase2">
-          Weiter: Ziel festlegen
+        <button type="button" className="knopf" onClick={onWeiter}>
+          {hatZiel ? 'Zurück zu Heute' : 'Weiter: Ziel festlegen'}
         </button>
-        <p id="phase2" className="ergebnis__phase2">
-          Kommt in Phase 2.{' '}
+        <p className="ergebnis__phase2">
           <button type="button" className="textknopf ergebnis__neu" onClick={onNeu}>
             Andere Datei auswerten
           </button>
