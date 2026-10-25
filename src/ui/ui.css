@@ -1,0 +1,142 @@
+/* Gemeinsame Bausteine aller Screens. */
+
+.seite {
+  position: relative;
+  max-width: 390px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top) + 58px) 24px calc(env(safe-area-inset-bottom) + 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* „clip“ statt „hidden“, damit der klebende Knopf unten funktioniert */
+  overflow: clip;
+}
+
+.kopfzeile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 32px;
+}
+
+/* Kleine Labels in Großbuchstaben */
+.label {
+  font-family: var(--schrift-mono);
+  font-size: 10.5px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--text-gedaempft);
+}
+
+.demo {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--hinweis-flaeche);
+  color: var(--hinweis);
+  font-family: var(--schrift-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.karte {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: var(--radius-karte);
+  border: 1px solid var(--rand);
+  background: var(--flaeche);
+}
+
+.karte--hervorgehoben {
+  border-radius: 22px;
+  background: var(--flaeche-hervorgehoben);
+}
+
+.karte--akzent {
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1.5px solid var(--akzent-rand);
+  background: var(--flaeche-hervorgehoben);
+}
+
+.knopf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--radius-button);
+  background: var(--akzent);
+  color: var(--hintergrund);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.knopf:disabled {
+  background: var(--linie);
+  color: var(--text-inaktiv);
+  cursor: default;
+}
+
+.textknopf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  background: none;
+  color: var(--akzent-text);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+/* Fortschritts- und Kategoriebalken */
+.balken {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--linie);
+  overflow: hidden;
+}
+
+.balken--dick {
+  height: 8px;
+  border-radius: 4px;
+}
+
+.balken__fuellung {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--akzent);
+  transition: width 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.balken__fuellung--grau {
+  background: var(--balken-grau);
+}
+
+.zahl {
+  font-family: var(--schrift-mono);
+  white-space: nowrap;
+}
+
+/* Hauptknopf klebt unten am Bildschirm, der Inhalt scrollt darunter durch. */
+.fusszeile-knopf {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  margin: auto -24px calc(-1 * (env(safe-area-inset-bottom) + 40px));
+  padding: 18px 24px calc(env(safe-area-inset-bottom) + 40px);
+  background: linear-gradient(to bottom, rgba(31, 30, 29, 0), var(--hintergrund) 18px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .balken__fuellung {
+    transition: none;
+  }
+}

@@ -1,0 +1,474 @@
+/* Start, Analyse, Ergebnis – Maße aus docs/design/klick-demo.html */
+
+/* ---------- Start ---------- */
+
+.start__bogen {
+  position: absolute;
+  left: 50%;
+  top: -640px;
+  width: 790px;
+  height: 790px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1.5px solid rgba(217, 119, 87, 0.45);
+  box-shadow: 0 14px 48px rgba(217, 119, 87, 0.22);
+  pointer-events: none;
+}
+
+.start__name {
+  font-family: var(--schrift-serif);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.start__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.start__titel {
+  font-size: 36px;
+  line-height: 1.12;
+  letter-spacing: -0.4px;
+}
+
+.start__text {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text-gedaempft);
+}
+
+.start__raten {
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 18px;
+}
+
+.start__frage {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--text-zweitrangig);
+}
+
+.start__eingabe {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1px solid var(--rand-eingabe);
+  background: var(--flaeche-eingabe);
+  font-family: var(--schrift-serif);
+}
+
+.start__eingabe:focus-within {
+  border-color: var(--akzent);
+}
+
+.start__eingabe input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: var(--schrift-serif);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.start__eingabe input::placeholder {
+  color: var(--text-platzhalter);
+}
+
+.start__eingabe span {
+  font-size: 18px;
+  color: var(--text-gedaempft);
+}
+
+.start__ablage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 18px 12px;
+  border-radius: var(--radius-karte);
+  border: 1.5px dashed var(--akzent-rand);
+  background: var(--flaeche-hervorgehoben);
+  text-align: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.start__ablage--aktiv {
+  border-color: var(--akzent);
+  background: var(--akzent-flaeche);
+}
+
+.start__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  background: var(--akzent-flaeche);
+  color: var(--akzent);
+}
+
+.start__ablage-titel {
+  font-size: 19px;
+}
+
+.start__ablage-text {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-gedaempft);
+}
+
+.start__waehlen {
+  min-height: 48px;
+  margin-top: 4px;
+  border-radius: 14px;
+  font-size: 15px;
+}
+
+.start__fehler {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--warnung-flaeche);
+  color: var(--warnung);
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+
+.start__datenschutz {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 0 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-gedaempft);
+}
+
+.start__datenschutz svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.start__datenschutz-hervor {
+  color: var(--text-zweitrangig);
+}
+
+.start__fuss {
+  margin-top: auto;
+  padding-top: 32px;
+  text-align: center;
+  font-family: var(--schrift-serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-gedaempft);
+}
+
+/* ---------- Analyse ---------- */
+
+.analyse__zurueck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-left: -10px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+  color: var(--text-zweitrangig);
+}
+
+.analyse__titelblock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.analyse__titel {
+  font-size: 32px;
+  letter-spacing: -0.3px;
+  line-height: 1.15;
+}
+
+.analyse__datei {
+  display: flex;
+  font-family: var(--schrift-mono);
+  font-size: 12px;
+  color: var(--text-gedaempft);
+  white-space: nowrap;
+}
+
+.analyse__dateiname {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.analyse__fortschritt {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.analyse__status {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12.5px;
+  color: var(--text-gedaempft);
+}
+
+.analyse__schritte {
+  gap: 0;
+  margin: 0;
+  padding: 4px 16px;
+  list-style: none;
+}
+
+.analyse__schritt {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+}
+
+.analyse__schritt + .analyse__schritt {
+  border-top: 1px solid var(--linie);
+}
+
+.analyse__schritt svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.analyse__schritt-titel {
+  font-size: 14.5px;
+  font-weight: 500;
+}
+
+.analyse__schritt--laeuft .analyse__schritt-titel {
+  color: var(--akzent-text);
+}
+
+.analyse__schritt--offen .analyse__schritt-titel {
+  color: var(--text-gedaempft);
+}
+
+.analyse__schritt-text {
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--text-gedaempft);
+}
+
+.icon-laeuft {
+  animation: drehen 0.9s linear infinite;
+}
+
+@keyframes drehen {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.analyse__befund {
+  animation: einblenden 0.35s ease;
+  /* Platz für den klebenden Knopf beim Hinscrollen */
+  scroll-margin-bottom: 130px;
+}
+
+.analyse__befund-satz {
+  font-family: var(--schrift-serif);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.analyse__befund-schaetzung {
+  font-size: 13px;
+  color: var(--hinweis);
+}
+
+@keyframes einblenden {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* ---------- Ergebnis ---------- */
+
+.ergebnis {
+  gap: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.ergebnis .fusszeile-knopf {
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.ergebnis__kopf {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ergebnis__kopf .kopfzeile {
+  min-height: 0;
+}
+
+.ergebnis__kopf .label {
+  font-size: 11px;
+}
+
+.ergebnis__titel {
+  font-size: 30px;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.ergebnis__hauptzahl-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ergebnis__hauptzahl {
+  font-family: var(--schrift-serif);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ergebnis__abweichung {
+  font-size: 13px;
+  color: var(--hinweis);
+}
+
+.ergebnis__abweichung--gut {
+  color: var(--gut);
+}
+
+.ergebnis__vergleich,
+.ergebnis__kategorie {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ergebnis__zeile {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 13.5px;
+}
+
+.ergebnis__zeile--klein {
+  font-size: 12.5px;
+  color: var(--text-gedaempft);
+}
+
+.ergebnis__zeile--hell {
+  color: var(--text-zweitrangig);
+}
+
+.ergebnis__betrag {
+  color: var(--text-zweitrangig);
+}
+
+.ergebnis__jahr,
+.ergebnis__davon {
+  font-size: 12.5px;
+  color: var(--text-gedaempft);
+}
+
+.ergebnis__davon {
+  font-size: 12px;
+}
+
+.ergebnis__fixkopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.ergebnis__fixtitel {
+  font-size: 18px;
+}
+
+.ergebnis__quote {
+  font-size: 12px;
+  color: var(--text-gedaempft);
+}
+
+.ergebnis__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ergebnis__chip {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--warnung-flaeche);
+  color: var(--warnung);
+  font-size: 12px;
+}
+
+.ergebnis__liste {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ergebnis__posten {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ergebnis__phase2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4px;
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--text-gedaempft);
+}
+
+.ergebnis__neu {
+  padding: 0 4px;
+  font-size: 12.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-laeuft,
+  .analyse__befund {
+    animation: none;
+  }
+}

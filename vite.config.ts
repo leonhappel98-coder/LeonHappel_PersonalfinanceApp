@@ -38,8 +38,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Alles, was die App braucht, wird für den Offline-Betrieb gespeichert (auch die Schriften).
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+        // Alles, was die App braucht, wird für den Offline-Betrieb gespeichert (auch Schriften und Beispieldaten).
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2,xlsx}'],
       },
     }),
   ],

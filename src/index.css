@@ -1,7 +1,9 @@
 /* Schriften kommen aus der App selbst (kein Google Fonts), nur der lateinische Zeichensatz. */
 @import '@fontsource/source-serif-4/latin-600.css';
+@import '@fontsource/source-serif-4/latin-400-italic.css';
 @import '@fontsource/ibm-plex-sans/latin-400.css';
 @import '@fontsource/ibm-plex-sans/latin-500.css';
+@import '@fontsource/ibm-plex-sans/latin-600.css';
 @import '@fontsource/ibm-plex-mono/latin-400.css';
 
 /* Design-Tokens aus CLAUDE.md – Farben, Schriften und Radien nur hier festlegen. */
@@ -9,7 +11,9 @@
   --hintergrund: #1f1e1d;
   --flaeche: #2b2a27;
   --flaeche-hervorgehoben: #30302d;
+  --flaeche-eingabe: #1a1918;
   --rand: rgba(250, 249, 245, 0.1);
+  --rand-eingabe: #55524c;
   --linie: #3d3c38;
 
   --text: #f5f4ee;
@@ -17,17 +21,26 @@
   --text-gedaempft: #a5a198;
 
   --akzent: #d97757;
+  --akzent-text: #e58b6d;
+  --akzent-rand: rgba(217, 119, 87, 0.55);
+  --akzent-flaeche: #3b2c26;
   --gut: #8fbf8a;
   --warnung: #f28b82;
   --warnung-balken: #e5534b;
+  --warnung-flaeche: rgba(229, 83, 75, 0.16);
   --hinweis: #e3b862;
+  --hinweis-flaeche: rgba(212, 162, 76, 0.16);
+  --balken-grau: #6b6862;
+  /* Etwas heller als im Design, damit der Kontrast mindestens 4.5:1 erreicht */
+  --text-platzhalter: #86827a;
+  --text-inaktiv: #b3afa6;
 
   --schrift-serif: 'Source Serif 4', Georgia, serif;
   --schrift-text: 'IBM Plex Sans', system-ui, sans-serif;
   --schrift-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
   --radius-karte: 20px;
-  --radius-button: 15px;
+  --radius-button: 16px;
 
   color-scheme: dark;
 }
@@ -44,26 +57,48 @@ body {
   background: var(--hintergrund);
   color: var(--text);
   font-family: var(--schrift-text);
-  font-size: 17px;
+  font-size: 15px;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
 }
 
 h1,
 h2,
 h3 {
-  margin: 0;
   font-family: var(--schrift-serif);
   font-weight: 600;
-  line-height: 1.15;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
 }
 
 button {
-  font: inherit;
+  cursor: pointer;
 }
 
 :focus-visible {
   outline: 2px solid var(--akzent);
   outline-offset: 2px;
+}
+
+/* Nur für Screenreader sichtbar */
+.nur-vorlesen {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
