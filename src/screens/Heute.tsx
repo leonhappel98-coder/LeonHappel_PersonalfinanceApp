@@ -1,3 +1,4 @@
+import type { BudgetMonat } from '../engine/budgets'
 import type { FinanzCheck } from '../engine/finanzCheck'
 import { formatEuro, formatProzent } from '../engine/format'
 import { fortschritt, nettovermoegen, type Ziel } from '../engine/prognose'
@@ -13,6 +14,7 @@ type Props = {
   ziel: Ziel
   plan: Schrittplan
   check: FinanzCheck
+  monat: BudgetMonat
   istDemo: boolean
   onTab: (tab: Tab) => void
   onEinstellungen: () => void
@@ -22,13 +24,18 @@ type Props = {
 
 const UMFANG = 2 * Math.PI * 52
 
-export function Heute({ ziel, plan, check, istDemo, onTab, onEinstellungen, onAuswertung, onFinanzCheck }: Props) {
+export function Heute({ ziel, plan, check, monat, istDemo, onTab, onEinstellungen, onAuswertung, onFinanzCheck }: Props) {
   const anteil = fortschritt(ziel)
   const prognose = plan.soWieJetzt
   const puenktlich = prognose.monateNachZiel !== null && prognose.monateNachZiel <= 0
   const mitSchritten = plan.mitAllenSchritten.zielErreicht
   const offen = plan.schritte.filter((s) => !s.erledigt)
   const naechster = offen.find((s) => s.plusProMonat !== null) ?? offen[0]
+  // Die drei knappsten Budgets: am meisten verbraucht im Verhältnis zum Budget
+  const knapp = monat.zeilen
+    .filter((z) => !z.fix && z.budget > 0)
+    .sort((a, b) => b.ausgegeben / b.budget - a.ausgegeben / a.budget)
+    .slice(0, 3)
 
   return (
     <main className="seite mit-tableiste heute">
@@ -97,6 +104,34 @@ export function Heute({ ziel, plan, check, istDemo, onTab, onEinstellungen, onAu
               {naechster.monateFrueher !== null && naechster.monateFrueher > 0 && <span>Ziel {dauer(naechster.monateFrueher)} früher</span>}
             </span>
           )}
+        </button>
+      )}
+
+      {knapp.length > 0 && (
+        <button type="button" className="karte heute__monat" onClick={() => onTab('budgets')} aria-label="Budgets öffnen">
+          <span className="ergebnis__fixkopf">
+            <span className="heute__monat-name">{monatJahrLang(monat.monat).split(' ')[0]}</span>
+            <span className="schritte__aufwand">
+              Tag {monat.tag} von {monat.tageImMonat}
+            </span>
+          </span>
+          {knapp.map((z) => (
+            <span key={z.kategorie} className="budgets__zeile">
+              <span className="ergebnis__zeile">
+                <span>{z.kategorie}</span>
+                <span className={z.ampel === 'warnung' ? 'zahl warnung' : 'zahl ergebnis__betrag'}>
+                  {new Intl.NumberFormat('de-DE', { maximumFractionDigits: 0 }).format(z.ausgegeben)} / {formatEuro(z.budget, 'ganz')}
+                </span>
+              </span>
+              <span className="budgets__balken">
+                <span
+                  className={`budgets__fuellung budgets__fuellung--${z.ampel}`}
+                  style={{ display: 'block', width: `${Math.min(1, z.ausgegeben / z.budget) * 100}%` }}
+                />
+                <span className="budgets__tempo" style={{ left: `${monat.tempo * 100}%` }} />
+              </span>
+            </span>
+          ))}
         </button>
       )}
 

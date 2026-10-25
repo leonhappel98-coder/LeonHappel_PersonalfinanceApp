@@ -130,3 +130,23 @@ export function IconSchritte() {
     </svg>
   )
 }
+
+export function IconBudgets() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" strokeWidth="1.9" {...strich} aria-hidden="true">
+      <rect x="3" y="6" width="18" height="13" rx="3" />
+      <path d="M3 10h18" />
+      <path d="M16 15h2" />
+    </svg>
+  )
+}
+
+export function IconDaten() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" strokeWidth="1.9" {...strich} aria-hidden="true">
+      <path d="M12 15V4" />
+      <path d="M8 8l4-4 4 4" />
+      <path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4" />
+    </svg>
+  )
+}
