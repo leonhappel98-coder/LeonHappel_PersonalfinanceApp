@@ -26,6 +26,9 @@ export function KiAnalyse({ zusammenfassung, ziel, sparrateJetzt, startMonat, er
   const [fehler, setFehler] = useState<string>()
   const eingerichtet = kiEingerichtet()
 
+  // Pausiert, solange in config.ts kein KI_SERVER_URL eingetragen ist: dann gar nicht anzeigen.
+  if (!eingerichtet) return null
+
   async function senden() {
     fenster.current?.close()
     setFehler(undefined)
@@ -75,8 +78,8 @@ export function KiAnalyse({ zusammenfassung, ziel, sparrateJetzt, startMonat, er
         </p>
       )}
 
-      <button type="button" className="knopf schritte__kopieren" disabled={!eingerichtet || laedt} onClick={() => fenster.current?.showModal()}>
-        {!eingerichtet ? 'Wird gerade eingerichtet' : ergebnis ? 'Neu analysieren' : 'KI-Analyse starten'}
+      <button type="button" className="knopf schritte__kopieren" disabled={laedt} onClick={() => fenster.current?.showModal()}>
+        {ergebnis ? 'Neu analysieren' : 'KI-Analyse starten'}
       </button>
 
       <dialog ref={fenster} className="zustimmung" aria-labelledby="zustimmung-titel">
