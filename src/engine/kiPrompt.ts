@@ -2,7 +2,8 @@
 // Die App sendet nichts: Der Nutzer kopiert den Text selbst.
 import { art } from './auswerten'
 import { formatEuro, formatProzent } from './format'
-import { berechnePrognose, nettovermoegen, type Ziel } from './prognose'
+import { SZENARIO_RENDITE } from '../config'
+import { berechnePrognose, nettovermoegen, noetigeSparrate, type Ziel } from './prognose'
 import type { Schrittplan } from './schritte'
 import type { Analyse } from './typen'
 
@@ -16,7 +17,13 @@ const auf10 = (betrag: number) => Math.round(betrag / 10) * 10
 const auf1000 = (betrag: number) => Math.round(betrag / 1000) * 1000
 const euro10 = (betrag: number) => `ca. ${formatEuro(auf10(betrag), 'ganz')}`
 const euro1000 = (betrag: number) => `ca. ${formatEuro(auf1000(betrag), 'ganz')}`
-const anonym = (unterkategorie?: string) => (!unterkategorie || SENSIBEL.test(unterkategorie) ? 'Sonstiges' : unterkategorie)
+/** Die Händlerliste schreibt Umlaute aus („Buecher“), damit Finanzguru-Namen passen. Im Text für die KI stehen sie richtig. */
+const MIT_UMLAUTEN: Record<string, string> = {
+  'Buecher & Zeitungen': 'Bücher & Zeitungen',
+  Rundfunkgebuehren: 'Rundfunkgebühren',
+}
+const anonym = (unterkategorie?: string) =>
+  !unterkategorie || SENSIBEL.test(unterkategorie) ? 'Sonstiges' : (MIT_UMLAUTEN[unterkategorie] ?? unterkategorie)
 
 /** Summen je (anonymisierter) Unterkategorie, pro Monat, größte zuerst. Kleinstbeträge unter 5 € fallen weg. */
 function proUnterkategorie(posten: { name?: string; proMonat: number }[]): [string, number][] {
@@ -39,7 +46,9 @@ export function erstelleKiPrompt(analyse: Analyse, ziel: Ziel | undefined, plan:
       'Frag nach, wenn dir für einen guten Rat etwas fehlt. Empfiehl keine konkreten Finanzprodukte.',
   )
 
+  const personen = ziel?.personenImHaushalt
   abschnitt('EINNAHMEN UND QUOTEN', [
+    ...(personen ? [`Haushalt: ${personen} ${personen === 1 ? 'Person' : 'Personen'}`] : []),
     `Nettoeinkommen: ${euro10(analyse.nettoeinkommenProMonat)}`,
     `Sparquote: ${formatProzent(analyse.sparquote)} (${euro10(analyse.sparenProMonat)} ins Depot)`,
     `Fixkostenquote: ${formatProzent(analyse.fixkostenQuote)} vom Netto`,
@@ -53,12 +62,14 @@ export function erstelleKiPrompt(analyse: Analyse, ziel: Ziel | undefined, plan:
     }),
   )
 
+  // Gleicher Name wie bei der Lebenshaltung (z. B. „Sport“) → als Vertrag kennzeichnen, sonst wirkt es doppelt gezählt
+  const namenLebenshaltung = new Set(analyse.kategorien.flatMap((k) => k.unterkategorien.map((u) => anonym(u.name))))
   const fixkosten = analyse.buchungen
     .filter((b) => art(b) === 'fixkosten')
     .map((b) => ({ name: b.unterkategorie, proMonat: -b.betrag / analyse.zeitraum.monate }))
   abschnitt(
     `FIXKOSTEN: ${euro10(analyse.fixkostenProMonat)}`,
-    proUnterkategorie(fixkosten).map(([name, wert]) => `${name}: ${euro10(wert)}`),
+    proUnterkategorie(fixkosten).map(([name, wert]) => `${name}${namenLebenshaltung.has(name) ? ' (Vertrag)' : ''}: ${euro10(wert)}`),
   )
 
   if (analyse.einmaleffekte.summe > 0) {
@@ -77,10 +88,16 @@ export function erstelleKiPrompt(analyse: Analyse, ziel: Ziel | undefined, plan:
   if (ziel) {
     const sparrate = plan?.sparrateJetzt ?? ziel.sparrateProMonat
     const prognose = plan?.soWieJetzt ?? berechnePrognose({ ...ziel, sparrateProMonat: sparrate }, startMonat, 'realistisch')
+    const noetig = noetigeSparrate(ziel, startMonat, SZENARIO_RENDITE.realistisch)
     abschnitt('VERMÖGEN UND ZIEL', [
       `Vermögen heute: ${euro1000(nettovermoegen(ziel))}, davon flüssig ${euro1000(ziel.tagesgeld)}`,
       `Ziel: ${euro1000(ziel.zielBetrag)} bis ${monatJahr(ziel.zielMonat)}`,
       `Sparrate ins Depot: ${euro10(sparrate)} im Monat`,
+      ...(noetig === null
+        ? []
+        : noetig === 0
+          ? ['Für das Ziel nötig: keine weitere Sparrate, das Depot wächst bei 5 % Rendite von allein dorthin']
+          : [`Für das Ziel nötig bei 5 % Rendite: ${euro10(noetig)} im Monat`]),
       prognose.zielErreicht
         ? `Prognose bei 5 % Rendite: Ziel erreicht im ${monatJahr(prognose.zielErreicht)}`
         : 'Prognose bei 5 % Rendite: Ziel wird in 50 Jahren nicht erreicht',

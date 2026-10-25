@@ -14,6 +14,8 @@ export type Ziel = {
   zielMonat: string
   /** Für den Altersvergleich im Finanz-Check (optional) */
   geburtsjahr?: number
+  /** Für den KI-Prompt: Wie viele Personen leben von diesem Geld? (optional) */
+  personenImHaushalt?: number
 }
 
 export type Prognose = {
@@ -49,6 +51,20 @@ export function nettovermoegen(ziel: Ziel): number {
 /** Anteil des Ziels, der heute schon erreicht ist (0–1, kann über 1 liegen). */
 export function fortschritt(ziel: Ziel): number {
   return ziel.zielBetrag > 0 ? nettovermoegen(ziel) / ziel.zielBetrag : 0
+}
+
+/**
+ * Sparrate pro Monat, mit der das Ziel genau im Zielmonat erreicht wird (gleiche Rechnung wie rechnePrognose).
+ * 0, wenn das Ziel auch ohne Sparen erreicht wird. null, wenn der Zielmonat nicht in der Zukunft liegt.
+ */
+export function noetigeSparrate(ziel: Ziel, startMonat: string, rendite: number): number | null {
+  const n = monateZwischen(startMonat, ziel.zielMonat)
+  if (n <= 0) return null
+  const monatsrendite = (1 + rendite) ** (1 / 12) - 1
+  const wachstum = (1 + monatsrendite) ** n
+  const fehlt = ziel.zielBetrag - ziel.tagesgeld - ziel.depot * wachstum
+  if (fehlt <= 0) return 0
+  return monatsrendite === 0 ? fehlt / n : (fehlt * monatsrendite) / (wachstum - 1)
 }
 
 /**

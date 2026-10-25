@@ -6,7 +6,7 @@ import { erstelleKiPrompt } from './kiPrompt'
 import type { Ziel } from './prognose'
 import { erstelleSchrittplan } from './schritte'
 
-const alex: Ziel = { depot: 31_800, tagesgeld: 2_400, sparrateProMonat: 420, zielBetrag: 100_000, zielMonat: '2030-07' }
+const alex: Ziel = { depot: 31_800, tagesgeld: 2_400, sparrateProMonat: 420, zielBetrag: 100_000, zielMonat: '2030-07', personenImHaushalt: 1 }
 const START = '2026-10'
 
 function lade(datei: string): Analyse {
@@ -58,6 +58,22 @@ describe.each(['kontoexport_alex_finanzguru.xlsx', 'kontoexport_alex_sparkasse.c
     expect(prompt).toContain('Vermögen heute: ca. 34.000 €')
     expect(prompt).toContain('Ziel: ca. 100.000 € bis Juli 2030')
     expect(prompt).toContain('Handytarif wechseln: ca. 20 € im Monat (erledigt)')
+  })
+
+  it('nennt die nötige Sparrate und den Haushalt', () => {
+    expect(prompt).toMatch(/Für das Ziel nötig bei 5 % Rendite: ca\. [\d.]+ € im Monat/)
+    expect(prompt).toContain('Haushalt: 1 Person')
+  })
+
+  it('schreibt Umlaute richtig', () => {
+    expect(prompt).not.toMatch(/Buecher|gebuehr/)
+    expect(prompt).toContain('Bücher & Zeitungen')
+  })
+
+  it('kein Name steht ungekennzeichnet bei Lebenshaltung und Fixkosten', () => {
+    const [lebenshaltung, fixkosten] = prompt.split('FIXKOSTEN:')
+    const fixNamen = [...fixkosten.split('EINMALEFFEKTE')[0].matchAll(/^- (.+?): /gm)].map((m) => m[1])
+    for (const name of fixNamen) expect(lebenshaltung, name).not.toContain(`${name} ca.`)
   })
 })
 

@@ -1,6 +1,6 @@
 // Abnahme der Prognose mit Alex (RECHENKERN.md, Abschnitt 9). Werte unabhängig nachgerechnet.
 import { describe, expect, it } from 'vitest'
-import { berechnePrognose, fortschritt, monateZwischen, nettovermoegen, plusMonate, type Ziel } from './prognose'
+import { berechnePrognose, fortschritt, monateZwischen, nettovermoegen, noetigeSparrate, plusMonate, rechnePrognose, type Ziel } from './prognose'
 
 const alex: Ziel = { depot: 31_800, tagesgeld: 2_400, sparrateProMonat: 420, zielBetrag: 100_000, zielMonat: '2030-07' }
 const START = '2026-10'
@@ -54,5 +54,25 @@ describe('Sonderfälle', () => {
     expect(plusMonate('2026-12', 1)).toBe('2027-01')
     expect(monateZwischen('2030-07', '2034-12')).toBe(53)
     expect(monateZwischen('2030-07', '2030-03')).toBe(-4)
+  })
+})
+
+describe('noetigeSparrate', () => {
+  const ziel: Ziel = { depot: 30_000, tagesgeld: 2_000, sparrateProMonat: 0, zielBetrag: 100_000, zielMonat: '2030-07' }
+
+  it('erreicht mit der berechneten Rate genau den Zielmonat', () => {
+    const rate = noetigeSparrate(ziel, '2026-10', 0.05)!
+    expect(rate).toBeGreaterThan(900)
+    expect(rechnePrognose({ ...ziel, sparrateProMonat: Math.ceil(rate) }, '2026-10', 0.05).zielErreicht).toBe('2030-07')
+    expect(rechnePrognose({ ...ziel, sparrateProMonat: Math.floor(rate) - 1 }, '2026-10', 0.05).zielErreicht).not.toBe('2030-07')
+  })
+
+  it('ohne Rendite: fehlender Betrag durch Monate', () => {
+    expect(noetigeSparrate({ ...ziel, zielMonat: '2027-10' }, '2026-10', 0)).toBeCloseTo(68_000 / 12)
+  })
+
+  it('0, wenn das Ziel schon von allein erreicht wird; null bei Zielmonat in der Vergangenheit', () => {
+    expect(noetigeSparrate({ ...ziel, zielBetrag: 30_000 }, '2026-10', 0.05)).toBe(0)
+    expect(noetigeSparrate(ziel, '2030-07', 0.05)).toBeNull()
   })
 })

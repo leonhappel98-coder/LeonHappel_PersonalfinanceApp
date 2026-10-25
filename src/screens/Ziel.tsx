@@ -34,6 +34,7 @@ export function Ziel({ analyse, istDemo, ziel, onFertig, onZurueck, onNeueDatei,
   const [zielBetrag, setZielBetrag] = useState(alsText(start?.zielBetrag ?? 100_000))
   const [zielMonat, setZielMonat] = useState(start?.zielMonat ?? plusMonate(aktuellerMonat(), 60))
   const [geburtsjahr, setGeburtsjahr] = useState(start?.geburtsjahr ? String(start.geburtsjahr) : '')
+  const [personen, setPersonen] = useState(start?.personenImHaushalt ? String(start.personenImHaushalt) : '')
   const [diesesJahr] = useState(() => new Date().getFullYear())
 
   const zahl = (text: string) => (text.trim() === '' ? 0 : leseBetrag(text))
@@ -44,13 +45,15 @@ export function Ziel({ analyse, istDemo, ziel, onFertig, onZurueck, onNeueDatei,
     zielBetrag: zahl(zielBetrag),
     zielMonat,
     geburtsjahr: geburtsjahr.trim() === '' ? undefined : Number(geburtsjahr),
+    personenImHaushalt: personen.trim() === '' ? undefined : Number(personen),
   }
 
   const gueltig =
     [werte.depot, werte.tagesgeld, werte.sparrateProMonat].every((w) => !isNaN(w) && w >= 0) &&
     werte.zielBetrag > 0 &&
     /^\d{4}-\d{2}$/.test(zielMonat) &&
-    (werte.geburtsjahr === undefined || (werte.geburtsjahr >= diesesJahr - 110 && werte.geburtsjahr <= diesesJahr - 14))
+    (werte.geburtsjahr === undefined || (werte.geburtsjahr >= diesesJahr - 110 && werte.geburtsjahr <= diesesJahr - 14)) &&
+    (werte.personenImHaushalt === undefined || (werte.personenImHaushalt >= 1 && werte.personenImHaushalt <= 20))
 
   return (
     <main className="seite ziel">
@@ -131,6 +134,26 @@ export function Ziel({ analyse, istDemo, ziel, onFertig, onZurueck, onNeueDatei,
             </span>
             <span id="geburtsjahr-hilfe" className="feld__hilfe">
               Für den Vergleich mit Gleichaltrigen im Finanz-Check. Bleibt auf deinem Gerät.
+            </span>
+          </div>
+          <div className="feld">
+            <label htmlFor="personen" className="feld__name">
+              Personen im Haushalt
+            </label>
+            <span className="feld__eingabe">
+              <input
+                id="personen"
+                type="text"
+                inputMode="numeric"
+                maxLength={2}
+                placeholder="z. B. 1"
+                value={personen}
+                onChange={(e) => setPersonen(e.target.value.replace(/\D/g, ''))}
+                aria-describedby="personen-hilfe"
+              />
+            </span>
+            <span id="personen-hilfe" className="feld__hilfe">
+              Wie viele Personen leben von diesem Geld? Hilft der KI, deine Ausgaben einzuordnen.
             </span>
           </div>
         </section>
