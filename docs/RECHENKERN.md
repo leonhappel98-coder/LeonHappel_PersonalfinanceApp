@@ -90,3 +90,18 @@ Bank-CSV: Gegenpartei und Zweck gegen `merchants.de.json` prüfen (Stichwort →
 | Hinweise | Handy 39,99 € „Tarif prüfen“; Netflix + Disney+ „doppelt?“ | gleich |
 
 Kategorien pro Monat (Finanzguru): Essen & Trinken 520 (davon Lieferdienst/Restaurants 210), Freizeit 260, Shopping 240, Mobilität 170, Sonstiges 170. Die CSV darf bei den Kategorien abweichen, solange die Summe stimmt; Buchungen wie „Jonas Keller“ oder PayPal ohne erkennbaren Händler landen unter „Zum Nachschauen“.
+
+## 9. Prognose (Phase 2)
+
+Eingabe: Depotwert, Tagesgeld (flüssig), Sparrate pro Monat (vorbelegt mit „Sparen pro Monat“ aus der Auswertung), Zielbetrag, Zielmonat.
+
+- Nettovermögen heute = Depotwert + Tagesgeld.
+- Jeden Monat: Depot wächst mit der Monatsrendite `(1 + Jahresrendite)^(1/12) − 1`, danach kommt die Sparrate dazu (am Monatsende). Das Tagesgeld bleibt gleich (keine Zinsen).
+- Die Sparrate bleibt gleich (keine jährliche Steigerung).
+- Szenarien (Jahresrendite, Schwellen in `config.ts`): vorsichtig 3 %, realistisch 5 %, optimistisch 7 %.
+- Ziel erreicht = erster Monat, in dem Depot + Tagesgeld ≥ Zielbetrag. Abstand zum Zielmonat in Monaten (positiv = später, negativ = früher). Nach 50 Jahren ohne Erreichen: „nicht erreichbar“.
+- Fortschritt = Nettovermögen heute ÷ Zielbetrag.
+
+Ehrlich rechnen: Die Design-Bilder zeigen für Alex „Okt 2030“; mit seinen echten Zahlen (Sparplan 420 €/Monat) kommt etwas Späteres heraus. Die App zeigt das echte Ergebnis.
+
+Abnahme mit Alex (Start Okt 2026, Depot 31.800 €, Tagesgeld 2.400 €, Sparrate 420 €, Ziel 100.000 € bis Juli 2030): Die Werte stehen in `src/engine/prognose.test.ts` und wurden unabhängig nachgerechnet.
