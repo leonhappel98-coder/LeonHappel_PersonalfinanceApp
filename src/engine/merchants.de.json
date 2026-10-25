@@ -1,0 +1,52 @@
+{
+  "Essen & Trinken": {
+    "Lebensmittel": ["rewe", "edeka", "aldi", "aldi sued", "aldi nord", "lidl", "netto", "netto marken-discount", "penny", "kaufland", "norma", "globus", "tegut", "famila", "marktkauf", "hit markt", "nahkauf", "combi", "wasgau", "denns", "dennree", "alnatura", "basic bio", "bio company", "vollcorner", "erdkorn", "superbiomarkt", "netto city", "rewe to go", "edeka center", "e center", "konsum", "feneberg", "v-markt", "jibi", "baeckerei", "backerei", "kamps", "backwerk", "ditsch", "le crobag", "back-factory", "wiener feinbaecker", "steinecke", "baecker", "metzgerei", "fleischerei", "flink", "gorillas", "getir", "knuspr", "picnic", "markt stand", "marktstand", "wochenmarkt", "hofladen", "asia markt", "getraenke hoffmann", "trinkgut", "getraenkemarkt", "kiosk", "spaetkauf", "tankstelle shop", "amazon fresh", "mytime", "hellofresh", "marley spoon"],
+    "Lieferservice": ["lieferando", "lieferando.de", "wolt", "wolt deutschland", "uber eats", "deliveroo", "foodora", "pizza.de", "domino's", "dominos", "call a pizza", "joey's pizza", "smiley's", "pizza hut delivery"],
+    "Restaurants": ["starbucks", "mcdonald's", "mcdonalds", "burger king", "kfc", "subway", "vapiano", "l'osteria", "losteria", "hans im glueck", "burgerheart", "five guys", "dean & david", "nordsee", "block house", "maredo", "coffee fellows", "tchibo", "einstein kaffee", "balzac coffee", "espresso house", "dunkin", "pizza hut", "peter pane", "jim block", "sausalitos", "alex gastro", "cafe del sol", "bar", "cafe", "café", "pizzeria", "restaurant", "trattoria", "osteria", "ristorante", "bistro", "imbiss", "doener", "kebab", "sushi", "brauhaus", "biergarten", "kneipe", "wirtshaus", "gasthaus", "gasthof", "mensa", "kantine", "eiscafe", "eisdiele", "cocktailbar", "weinbar", "dean&david", "green bowl", "frittenwerk", "bagel brothers"]
+  },
+  "Freizeit": {
+    "Buecher & Zeitungen": ["thalia", "hugendubel", "mayersche", "osiander", "weltbild", "buecher.de", "buchhandlung", "kiosk zeitungen", "spiegel", "zeit online", "faz", "sueddeutsche", "readly", "audible", "kindle"],
+    "Veranstaltungen": ["eventim", "ticketmaster", "reservix", "adticket", "ticketone", "dice.fm", "eventbrite", "myticket", "konzertkasse", "theaterkasse", "staatstheater", "philharmonie", "olympiapark"],
+    "Sonstige Freizeitausgaben": ["escape room", "bowling", "bowling center", "cinestar", "cinemaxx", "uci kinowelt", "kino", "yorck kino", "minigolf", "kletterhalle", "boulderhalle", "boulderwelt", "trampolinpark", "schwimmbad", "therme", "freizeitbad", "zoo", "tierpark", "museum", "lasertag", "billard", "steam", "playstation", "nintendo", "xbox", "google play", "app store", "itunes", "smyths toys", "mytoys", "spielwaren", "blumen", "fleurop", "blume 2000", "pflanzen koelle", "dehner", "gartencenter"],
+    "Urlaub": ["booking.com", "booking", "airbnb", "expedia", "hrs", "trivago", "check24 reisen", "tui", "condor", "lufthansa", "eurowings", "ryanair", "easyjet", "wizz air", "tuifly", "discover airlines", "ab-in-den-urlaub", "holidaycheck", "fewo-direkt", "hotel", "motel one", "a&o hostel", "meininger", "ibis", "hilton", "marriott"],
+    "Sport": ["decathlon", "sportscheck", "intersport", "fitness first", "mcfit", "clever fit", "john reed", "urban sports club", "fitx", "kieser training", "sportverein", "tennisclub"]
+  },
+  "Shopping": {
+    "Shopping": ["amazon", "amazon eu", "amzn", "ebay", "otto.de", "ikea", "tk maxx", "galeria", "kaufhof", "karstadt", "manufactum", "depot", "butlers", "action", "tedi", "kik", "woolworth", "nanu-nana", "hema", "flying tiger", "xxxlutz", "moebel kraft", "poco", "roller", "hoeffner", "segmueller", "home24", "westwing", "obi", "hornbach", "bauhaus", "toom", "hagebaumarkt", "globus baumarkt", "temu", "shein", "aliexpress", "wish", "etsy", "thomann", "tchibo shop", "kaufland.de", "zooplus", "fressnapf", "das futterhaus", "qvc", "lidl online", "deutsche post shop", "hermes shop"],
+    "Bekleidung": ["zalando", "zalando se", "h&m", "c&a", "primark", "zara", "mango", "jack & jones", "s.oliver", "esprit", "tom tailor", "peek & cloppenburg", "p&c", "breuninger", "about you", "uniqlo", "snipes", "foot locker", "deichmann", "goertz", "humanic", "nike", "adidas", "puma", "new yorker", "bershka", "pull&bear", "stradivarius", "arket", "weekday", "asos", "bonprix", "vinted", "hollister", "abercrombie", "levi's", "tommy hilfiger", "hugo boss", "orsay", "takko", "ernstings family"],
+    "Elektrohandel": ["mediamarkt", "media markt", "saturn", "cyberport", "notebooksbilliger", "alternate", "conrad", "apple store", "apple.com", "gravis", "euronics", "expert", "otto elektro", "mindfactory", "caseking"]
+  },
+  "Mobilität": {
+    "Bus & Bahn": ["db vertrieb", "deutsche bahn", "db fernverkehr", "db regio", "bahn.de", "mvg", "mvg automat", "mvv", "bvg", "hvv", "vrs", "kvb", "rmv", "vbb", "vvs", "vrr", "dvb", "lvb", "uestra", "ssb", "kvv", "vgn", "rheinbahn", "flixbus", "flixtrain", "deutschlandticket", "deutschland-ticket", "blablacar", "metronom", "abellio", "national express", "go ahead", "trenitalia", "sncf", "oebb"],
+    "Sharing / Gemietet": ["tier", "tier mobility", "lime", "voi", "bolt", "dott", "share now", "miles", "sixt share", "we share", "nextbike", "call a bike", "stadtmobil", "cambio", "flinkster", "sixt", "europcar", "avis", "hertz", "enterprise", "starcar", "getaround"],
+    "Taxi": ["uber bv", "uber", "freenow", "free now", "taxi", "bolt taxi", "taxi.eu", "clevershuttle"],
+    "Tanken": ["aral", "shell", "esso", "jet", "totalenergies", "avia", "agip", "star tankstelle", "hem", "tankstelle", "ionity", "enbw mobility", "tesla supercharger", "allego", "ewe go"],
+    "Parken": ["apcoa", "contipark", "parkhaus", "parkster", "easypark", "parkandjoy", "parkticket"]
+  },
+  "Sonstiges": {
+    "Drogerie": ["dm-drogerie", "dm-drogerie markt", "dm", "rossmann", "mueller", "budni", "douglas", "flaconi", "parfuemerie"],
+    "Gesundheit": ["apotheke", "docmorris", "shop apotheke", "medpex", "fielmann", "apollo optik", "arztpraxis", "zahnarzt", "physiotherapie"],
+    "Sonstige Ausgaben": ["deutsche post", "dhl", "hermes", "dpd", "ups", "friseur", "barbershop", "barber", "klier", "kosmetik", "nagelstudio", "reinigung", "waescherei", "schluesseldienst", "copyshop", "stadtverwaltung", "buergeramt", "gebuehr", "bussgeld"]
+  },
+  "Wohnen": {
+    "Miete": ["hausverwaltung", "vonovia", "deutsche wohnen", "leg immobilien", "vivawest", "gewobag", "degewo", "saga", "wohnungsbau", "wohnungsgenossenschaft", "miete"],
+    "Sonstiges Wohnen": ["stadtwerke", "e.on", "eon", "vattenfall", "enbw", "rwe", "lichtblick", "naturstrom", "yello", "tibber", "octopus energy", "ostrom", "polarstern", "entega", "mainova", "swm"],
+    "Rundfunkgebuehren": ["rundfunk ard", "rundfunkbeitrag", "beitragsservice", "ard zdf"]
+  },
+  "Verträge & Abos": {
+    "Mobilfunk": ["mobilfunk", "mobil", "vodafone", "o2", "telefonica", "congstar", "blau", "aldi talk", "fraenk", "freenet", "klarmobil", "simyo", "winsim", "drillisch", "1&1 mobilfunk", "lebara", "lidl connect", "ja mobil"],
+    "Internet & Telefon": ["telekom", "deutsche telekom", "internet", "1&1", "pyur", "m-net", "netcologne", "ewe tel", "glasfaser", "kabel deutschland", "unitymedia"],
+    "Serien & Filme": ["netflix", "disney plus", "disney+", "prime video", "amazon prime", "wow", "sky deutschland", "paramount", "apple tv", "dazn", "joyn", "rtl+", "magentatv", "waipu"],
+    "Musik": ["spotify", "apple music", "deezer", "tidal", "youtube premium", "amazon music"],
+    "Software & Cloud": ["icloud", "google one", "dropbox", "microsoft 365", "adobe", "chatgpt", "openai", "anthropic", "notion", "1password"],
+    "Versicherungen": ["versicherung", "allianz", "huk-coburg", "huk", "ergo", "axa", "generali", "debeka", "devk", "signal iduna", "r+v", "zurich", "hannoversche", "cosmosdirekt", "wgv", "barmenia", "gothaer", "techniker krankenkasse", "aok", "barmer", "dak"],
+    "Sport": ["fitbox", "fitness", "gym", "urban sports"],
+    "Mitgliedschaften": ["adac", "verein", "mitgliedsbeitrag", "gewerkschaft", "ver.di", "ig metall"]
+  },
+  "Sparen": {
+    "Kapitalanlage": ["trade republic", "scalable", "scalable capital", "comdirect depot", "sparplan", "etf", "flatex", "smartbroker", "justtrade", "finanzen.net zero", "consorsbank depot", "ing depot", "dkb depot", "growney", "quirion", "whitebox", "visualvest", "bausparkasse", "bausparvertrag", "wuestenrot", "schwaebisch hall", "lbs"]
+  },
+  "Einnahmen": {
+    "Lohn / Gehalt": ["lohn", "gehalt", "lohn/gehalt", "bezuege", "besoldung", "entgelt"]
+  }
+}

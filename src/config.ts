@@ -8,3 +8,6 @@ export const APP_BESCHREIBUNG = 'Zeigt aus deinem Kontoexport, wohin dein Geld g
 
 /** Ab diesem Betrag (in €) gilt eine Ausgabe ohne Vertrag als Einmaleffekt. */
 export const EINMALEFFEKT_SCHWELLE = 300
+
+/** Ab diesem Monatsbetrag (in €) bekommt ein Handyvertrag den Hinweis „Tarif prüfen“. */
+export const MOBILFUNK_TARIF_GRENZE = 25
