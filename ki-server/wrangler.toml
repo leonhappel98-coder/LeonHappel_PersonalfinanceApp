@@ -1,6 +1,6 @@
 # KI-Server für „KI-Analyse starten“ (Cloudflare Worker).
 # Schickt die anonyme Zusammenfassung an Claude und gibt Vorschläge zurück. Speichert keine Inhalte.
-name = "kurs-ki"
+name = "loewen-finance-ki"
 main = "src/index.ts"
 compatibility_date = "2026-10-01"
 

@@ -1,7 +1,7 @@
 // Zentrale Einstellungen der App. Hier ändern, nicht verteilt im Code.
 
-/** Name der App (Arbeitsname, wird evtl. „Personal Finance“). */
-export const APP_NAME = 'Kurs'
+/** Name der App. „Leon“ heißt „Löwe“, daher der kleine Löwe im Icon. */
+export const APP_NAME = 'Löwen Finance'
 
 /** Wird oben auf dem Start-Screen als „by …“ gezeigt. */
 export const APP_AUTOR = 'Leon Happel'

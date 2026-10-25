@@ -10,7 +10,7 @@ Eine Finanz-App fürs Handy, die aus einem Kontoexport zeigt, wohin das Geld geh
 - Keine Fachbegriffe ohne kurze Erklärung. Frag nach, bevor du etwas Großes umbaust.
 - Arbeite in kleinen Schritten, die man im Video zeigen kann. Nach jedem Schritt muss die App laufen.
 
-App-Name: zentral in `src/config.ts` als `APP_NAME`, aktuell **„Kurs“** (Arbeitsname, wird evtl. „Personal Finance“).
+App-Name: zentral in `src/config.ts` als `APP_NAME`, aktuell **„Löwen Finance“** mit einem kleinen Löwen als Icon (`public/icon.svg`). Der frühere Arbeitsname war „Kurs“.
 
 ## Unverhandelbare Regeln: Datenschutz
 

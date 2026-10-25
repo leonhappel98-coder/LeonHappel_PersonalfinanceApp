@@ -30,7 +30,10 @@ export function Start({ schaetzung, setSchaetzung, onDatei, onBeispiel, istDemo,
 
       <header className="kopfzeile">
         <p className="start__name">
-          {APP_NAME} <span className="start__autor">by {APP_AUTOR}</span>
+          <img className="start__logo" src={`${import.meta.env.BASE_URL}icon.svg`} alt="" width="34" height="34" />
+          <span>
+            {APP_NAME} <span className="start__autor">by {APP_AUTOR}</span>
+          </span>
         </p>
         {istDemo && <DemoLabel />}
       </header>

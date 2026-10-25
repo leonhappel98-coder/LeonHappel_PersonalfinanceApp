@@ -28,7 +28,7 @@ function testUmgebung(): Env {
 }
 
 function anfrage(body: unknown, { herkunft = APP, methode = 'POST', pfad = '/analyse', ip = '1.2.3.4' } = {}) {
-  return new Request(`https://kurs-ki.example.workers.dev${pfad}`, {
+  return new Request(`https://loewen-finance-ki.example.workers.dev${pfad}`, {
     method: methode,
     headers: { 'content-type': 'application/json', ...(herkunft ? { Origin: herkunft } : {}), 'CF-Connecting-IP': ip },
     body: methode === 'POST' ? JSON.stringify(body) : undefined,
