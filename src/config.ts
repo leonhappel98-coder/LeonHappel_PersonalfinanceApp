@@ -28,6 +28,15 @@ export const SZENARIO_RENDITE = {
 /** So weit rechnet die Prognose höchstens voraus. */
 export const PROGNOSE_MAX_JAHRE = 50
 
+/**
+ * Adresse des eigenen KI-Servers (ki-server/), z. B. „https://loewen-finance-ki.NAME.workers.dev“.
+ * Leer = KI-Analyse noch nicht eingerichtet; der Knopf zeigt das dann an.
+ */
+export const KI_SERVER_URL = ''
+
+/** So lange wartet die App höchstens auf die KI-Antwort (Millisekunden). */
+export const KI_ZEITLIMIT_MS = 120_000
+
 /** Nächste Schritte (Phase 3) */
 export const SCHRITTE = {
   /** So viel kostet ein günstiger Handytarif im Monat (€). */

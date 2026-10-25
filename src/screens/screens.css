@@ -1114,3 +1114,159 @@
     transition: none;
   }
 }
+
+/* ---------- KI-Analyse ---------- */
+
+.ki {
+  margin-top: 6px;
+  border-color: var(--akzent-rand);
+}
+
+.ki__kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ki__marke {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--akzent-flaeche);
+  color: var(--akzent-text);
+  font-family: var(--schrift-mono);
+  font-size: 10.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.ki__ergebnis {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ki__karte {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--rand);
+  background: var(--flaeche-hervorgehoben);
+}
+
+.ki__karte--ausgaben .ki__tag {
+  background: var(--ausgaben-flaeche);
+  color: var(--ausgaben);
+}
+
+.ki__karte--einnahmen .ki__tag {
+  background: rgba(143, 191, 138, 0.16);
+  color: var(--gut);
+}
+
+.ki__karte--absicherung .ki__tag {
+  background: var(--hinweis-flaeche);
+  color: var(--hinweis);
+}
+
+.ki__karte--vermoegen .ki__tag {
+  background: var(--akzent-flaeche);
+  color: var(--akzent-text);
+}
+
+.ki__plus {
+  font-family: var(--schrift-mono);
+  color: var(--gut);
+}
+
+.ki__hinweis {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-gedaempft);
+}
+
+.ki__laedt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--akzent-text);
+}
+
+.ki__punkt {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--akzent);
+  animation: pulsieren 1.1s ease-in-out infinite;
+}
+
+@keyframes pulsieren {
+  50% {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
+}
+
+/* Zustimmungsfenster */
+.zustimmung {
+  width: min(390px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  padding: 20px 18px calc(env(safe-area-inset-bottom) + 12px);
+  border: 1px solid var(--rand);
+  border-radius: 22px;
+  background: var(--flaeche);
+  color: var(--text);
+}
+
+.zustimmung[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.zustimmung::backdrop {
+  background: rgba(var(--hintergrund-rgb), 0.82);
+}
+
+.zustimmung__titel {
+  font-size: 22px;
+}
+
+.zustimmung__fakten {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-gedaempft);
+}
+
+.zustimmung__fakten strong {
+  color: var(--text-zweitrangig);
+  font-weight: 500;
+}
+
+.zustimmung__text {
+  max-height: 34dvh;
+}
+
+.zustimmung__knoepfe {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zustimmung__abbrechen {
+  color: var(--text-zweitrangig);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ki__punkt {
+    animation: none;
+  }
+}

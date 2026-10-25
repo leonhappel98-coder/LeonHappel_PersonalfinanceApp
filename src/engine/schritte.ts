@@ -114,8 +114,8 @@ function findeSchritte(analyse: Analyse, ziel: Ziel): Omit<Schritt, 'dieseWoche'
   return schritte.sort((a, b) => (a.art === b.art ? (b.plusProMonat ?? 0) - (a.plusProMonat ?? 0) : a.art === 'Absicherung' ? -1 : 1))
 }
 
-/** Monate, die das Ziel mit `mehr` €/Monat früher erreicht wird. */
-function monateFrueher(ziel: Ziel, startMonat: string, sparrate: number, mehr: number): number | null {
+/** Monate, die das Ziel mit `mehr` €/Monat früher erreicht wird (realistisch), null wenn nicht berechenbar. */
+export function monateFrueher(ziel: Ziel, startMonat: string, sparrate: number, mehr: number): number | null {
   const ohne = berechnePrognose({ ...ziel, sparrateProMonat: sparrate }, startMonat, 'realistisch').zielErreicht
   const mit = berechnePrognose({ ...ziel, sparrateProMonat: sparrate + mehr }, startMonat, 'realistisch').zielErreicht
   return ohne && mit ? monateZwischen(mit, ohne) : null

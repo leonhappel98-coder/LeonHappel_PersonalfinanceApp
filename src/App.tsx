@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import beispielUrl from '../testdata/kontoexport_alex_finanzguru.xlsx?url'
 import type { Ziel as ZielDaten } from './engine/prognose'
 import { erstelleSchrittplan, type SchrittId } from './engine/schritte'
+import type { KiErgebnis } from './ki/kiAnalyse'
 import type { Analyse as AnalyseErgebnis } from './engine/typen'
 import { leseBetrag } from './engine/zahlen'
 import { Analyse } from './screens/Analyse'
@@ -26,6 +27,7 @@ export default function App() {
   const [analyse, setAnalyse] = useState<AnalyseErgebnis | null>(null)
   const [ziel, setZiel] = useState<ZielDaten>()
   const [erledigt, setErledigt] = useState<SchrittId[]>([])
+  const [kiErgebnis, setKiErgebnis] = useState<KiErgebnis>()
   const [istDemo, setIstDemo] = useState(false)
   const [fehler, setFehler] = useState<string>()
 
@@ -39,6 +41,7 @@ export default function App() {
         setSchaetzungText(zustand.schaetzung ? new Intl.NumberFormat('de-DE').format(zustand.schaetzung) : '')
         setZiel(zustand.ziel)
         setErledigt(zustand.erledigt ?? [])
+        setKiErgebnis(zustand.kiErgebnis)
         const ziel: Screen = zustand.ziel ? 'heute' : 'ergebnis'
         window.history.replaceState({ screen: ziel }, '')
         setScreen(ziel)
@@ -73,7 +76,7 @@ export default function App() {
 
   /** Speichert den aktuellen Stand, mit den übergebenen Änderungen. */
   function sichere(aenderung: Partial<Gespeichert> & Pick<Gespeichert, 'analyse'>) {
-    speichereZustand({ version: 1, dateiname, istDemo, schaetzung, ziel, erledigt, ...aenderung })
+    speichereZustand({ version: 1, dateiname, istDemo, schaetzung, ziel, erledigt, kiErgebnis, ...aenderung })
   }
 
   /** Liest die Datei auf dem Gerät und rechnet. Der Rechenkern wird erst jetzt geladen. */
@@ -88,7 +91,9 @@ export default function App() {
       const ergebnis = analysiereDatei(daten)
       if (ergebnis.anzahl.buchungen === 0) throw new Error('keine Buchungen')
       setAnalyse(ergebnis)
-      sichere({ analyse: ergebnis, dateiname: name, istDemo: demo })
+      // Eine alte KI-Analyse passt nicht mehr zu neuen Daten
+      setKiErgebnis(undefined)
+      sichere({ analyse: ergebnis, dateiname: name, istDemo: demo, kiErgebnis: undefined })
     } catch (e) {
       setFehler(fehlertext(e))
       setIstDemo(false)
@@ -115,6 +120,7 @@ export default function App() {
     setAnalyse(null)
     setZiel(undefined)
     setErledigt([])
+    setKiErgebnis(undefined)
     setIstDemo(false)
     setSchaetzungText('')
     setDateiname('')
@@ -185,6 +191,11 @@ export default function App() {
         ziel={ziel}
         plan={plan}
         istDemo={istDemo}
+        kiErgebnis={kiErgebnis}
+        onKiErgebnis={(neu) => {
+          setKiErgebnis(neu)
+          sichere({ analyse, kiErgebnis: neu })
+        }}
         onUmschalten={(schritt) => schrittUmschalten(schritt.id)}
         onTab={gehe}
       />

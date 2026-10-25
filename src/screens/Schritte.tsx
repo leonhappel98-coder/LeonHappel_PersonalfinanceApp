@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { formatEuro } from '../engine/format'
 import { erstelleKiPrompt } from '../engine/kiPrompt'
+import type { KiErgebnis } from '../ki/kiAnalyse'
 import type { Ziel } from '../engine/prognose'
 import type { Schritt, Schrittplan } from '../engine/schritte'
 import type { Analyse } from '../engine/typen'
 import { DemoLabel, IconFertig } from '../ui/Bausteine'
 import { TabLeiste, type Tab } from '../ui/TabLeiste'
 import { aktuellerMonat, dauer, monatJahr } from '../ui/texte'
+import { KiAnalyse } from './KiAnalyse'
 import './screens.css'
 
 type Props = {
@@ -14,16 +16,20 @@ type Props = {
   ziel: Ziel
   plan: Schrittplan
   istDemo: boolean
+  kiErgebnis?: KiErgebnis
+  onKiErgebnis: (ergebnis: KiErgebnis) => void
   onUmschalten: (schritt: Schritt) => void
   onTab: (tab: Tab) => void
 }
 
 const plus = (betrag: number) => `+${formatEuro(betrag, 'ganz')}/Monat`
 
-export function Schritte({ analyse, ziel, plan, istDemo, onUmschalten, onTab }: Props) {
+export function Schritte({ analyse, ziel, plan, istDemo, kiErgebnis, onKiErgebnis, onUmschalten, onTab }: Props) {
   const offen = plan.schritte.filter((s) => !s.erledigt)
   const erledigt = plan.schritte.filter((s) => s.erledigt)
   const nachZiel = plan.soWieJetzt.monateNachZiel
+  const start = aktuellerMonat()
+  const zusammenfassung = erstelleKiPrompt(analyse, ziel, plan, start)
 
   return (
     <main className="seite mit-tableiste schritte">
@@ -72,7 +78,16 @@ export function Schritte({ analyse, ziel, plan, istDemo, onUmschalten, onTab }: 
         </button>
       ))}
 
-      <KiPrompt text={erstelleKiPrompt(analyse, ziel, plan, aktuellerMonat())} />
+      <KiAnalyse
+        zusammenfassung={zusammenfassung}
+        ziel={ziel}
+        sparrateJetzt={plan.sparrateJetzt}
+        startMonat={start}
+        ergebnis={kiErgebnis}
+        onErgebnis={onKiErgebnis}
+      />
+
+      <KiPrompt text={zusammenfassung} />
 
       <TabLeiste aktiv="schritte" onWechsel={onTab} />
     </main>

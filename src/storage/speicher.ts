@@ -3,6 +3,7 @@ import { del, get, set } from 'idb-keyval'
 import type { Ziel } from '../engine/prognose'
 import type { SchrittId } from '../engine/schritte'
 import type { Analyse } from '../engine/typen'
+import type { KiErgebnis } from '../ki/kiAnalyse'
 
 const SCHLUESSEL = 'kurs-zustand'
 
@@ -15,6 +16,8 @@ export type Gespeichert = {
   ziel?: Ziel
   /** Abgehakte nächste Schritte */
   erledigt?: SchrittId[]
+  /** Letzte KI-Analyse, damit sie nicht jedes Mal neu bezahlt werden muss */
+  kiErgebnis?: KiErgebnis
 }
 
 /** Liest den gespeicherten Stand. Ohne Speicher (z. B. privates Surfen) einfach nichts. */
