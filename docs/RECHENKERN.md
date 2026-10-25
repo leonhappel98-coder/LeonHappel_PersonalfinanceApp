@@ -131,3 +131,18 @@ Ein Text, den der Nutzer selbst in sein Claude oder ChatGPT kopiert. Die App sen
 - Gerundet: Monatsbeträge auf 10 €, Vermögen und Ziel auf 1.000 €, Quoten auf ganze Prozent.
 - Nie drin: Namen (auch keine Händler), IBAN, Verwendungszweck, einzelne Buchungen, Datum einzelner Buchungen.
 - Sensible Unterkategorien (Gesundheit, Arzt, Apotheke, Spenden, Kirche, Gewerkschaft, Partei, Mitgliedschaften) werden vorher unter „Sonstiges“ zusammengefasst.
+
+## 12. Finanz-Check (Phase 4)
+
+| Kennzahl | Rechnung | grün | gelb | rot |
+| --- | --- | --- | --- | --- |
+| Notgroschen | Tagesgeld ÷ (Lebenshaltung + Fixkosten) pro Monat, in Monaten | ab 3 | 1 bis unter 3 | unter 1 |
+| Sparquote | Sparen ÷ Nettoeinkommen (Abschnitt 6) | ab 10,5 % (Deutschland-Schnitt) | 5 bis 10,5 % | unter 5 % |
+| Fixkostenquote | Fixkosten ÷ Nettoeinkommen (Abschnitt 3) | bis 35 % | bis 50 % | über 50 % |
+
+Grenzen in `config.ts` (`AMPEL`). Vergleichswerte mit Quelle in `src/engine/vergleichswerte.ts`:
+
+- Sparquote Deutschland 2025: 10,5 % (Statistisches Bundesamt).
+- Nettovermögen nach Alter (Median je Haushalt, inkl. Immobilien), Bundesbank-Vermögensbefragung 2023: 16–24: 13.000 €, 25–34: 19.100 €, 35–44: 75.100 €, 45–54: 156.200 €, 55–64: 255.900 €, 65–74: 211.900 €, ab 75: 149.400 €. Alter = aktuelles Jahr − Geburtsjahr (Eingabe in „Dein Ziel“, freiwillig).
+
+Abnahme mit Alex (Geburtsjahr 1997): Notgroschen 0,9 Monate (rot), Sparquote 14 % (grün), Fixkosten 41 % (gelb), Altersgruppe 25–34 mit Median 19.100 €, Alex 34.200 €.

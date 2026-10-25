@@ -12,6 +12,8 @@ export type Ziel = {
   sparrateProMonat: number
   zielBetrag: number
   zielMonat: string
+  /** Für den Altersvergleich im Finanz-Check (optional) */
+  geburtsjahr?: number
 }
 
 export type Prognose = {

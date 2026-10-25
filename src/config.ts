@@ -28,6 +28,16 @@ export const SZENARIO_RENDITE = {
 /** So weit rechnet die Prognose höchstens voraus. */
 export const PROGNOSE_MAX_JAHRE = 50
 
+/** Finanz-Check (Phase 4): ab welchem Wert eine Kachel grün bzw. gelb ist. Darunter (Fixkosten: darüber) rot. */
+export const AMPEL = {
+  /** Notgroschen in Monaten (Tagesgeld ÷ Lebenshaltung + Fixkosten) */
+  notgroschen: { gruen: 3, gelb: 1 },
+  /** Sparquote: grün ab dem Deutschland-Durchschnitt (Destatis 2025: 10,5 %) */
+  sparquote: { gruen: 0.105, gelb: 0.05 },
+  /** Fixkostenquote: grün bis, gelb bis */
+  fixkosten: { gruen: 0.35, gelb: 0.5 },
+} as const
+
 /**
  * Adresse des eigenen KI-Servers (ki-server/), z. B. „https://loewen-finance-ki.NAME.workers.dev“.
  * Leer = KI-Analyse noch nicht eingerichtet; der Knopf zeigt das dann an.
