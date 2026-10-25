@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import beispielUrl from '../testdata/kontoexport_alex_finanzguru.xlsx?url'
 import type { Ziel as ZielDaten } from './engine/prognose'
+import { erstelleFinanzCheck } from './engine/finanzCheck'
 import { erstelleSchrittplan, type SchrittId } from './engine/schritte'
 import type { KiErgebnis } from './ki/kiAnalyse'
 import type { Analyse as AnalyseErgebnis } from './engine/typen'
 import { leseBetrag } from './engine/zahlen'
 import { Analyse } from './screens/Analyse'
 import { Ergebnis } from './screens/Ergebnis'
+import { FinanzCheck } from './screens/FinanzCheck'
 import { Heute } from './screens/Heute'
 import { Prognose } from './screens/Prognose'
 import { Schritte } from './screens/Schritte'
@@ -15,7 +17,7 @@ import { Ziel } from './screens/Ziel'
 import { ladeZustand, loescheAlles, speichereZustand, type Gespeichert } from './storage/speicher'
 import { aktuellerMonat } from './ui/texte'
 
-type Screen = 'start' | 'analyse' | 'ergebnis' | 'ziel' | 'heute' | 'schritte' | 'prognose'
+type Screen = 'start' | 'analyse' | 'ergebnis' | 'ziel' | 'heute' | 'schritte' | 'prognose' | 'finanzcheck'
 
 const BEISPIEL_NAME = 'kontoexport_alex_finanzguru.xlsx'
 
@@ -73,6 +75,9 @@ export default function App() {
     () => (analyse && ziel ? erstelleSchrittplan(analyse, ziel, erledigt, aktuellerMonat()) : undefined),
     [analyse, ziel, erledigt],
   )
+
+  const [jahr] = useState(() => new Date().getFullYear())
+  const check = useMemo(() => (analyse && ziel ? erstelleFinanzCheck(analyse, ziel, jahr) : undefined), [analyse, ziel, jahr])
 
   /** Speichert den aktuellen Stand, mit den übergebenen Änderungen. */
   function sichere(aenderung: Partial<Gespeichert> & Pick<Gespeichert, 'analyse'>) {
@@ -170,16 +175,22 @@ export default function App() {
     )
   }
 
-  if (analyse && ziel && plan && screen === 'heute') {
+  if (check && screen === 'finanzcheck') {
+    return <FinanzCheck check={check} istDemo={istDemo} onZurueck={() => window.history.back()} onZielBearbeiten={() => gehe('ziel')} />
+  }
+
+  if (analyse && ziel && plan && check && screen === 'heute') {
     return (
       <Heute
         analyse={analyse}
         ziel={ziel}
         plan={plan}
+        check={check}
         istDemo={istDemo}
         onTab={gehe}
         onEinstellungen={() => gehe('ziel')}
         onAuswertung={() => gehe('ergebnis')}
+        onFinanzCheck={() => gehe('finanzcheck')}
       />
     )
   }

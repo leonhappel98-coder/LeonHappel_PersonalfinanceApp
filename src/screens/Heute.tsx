@@ -1,3 +1,4 @@
+import type { FinanzCheck } from '../engine/finanzCheck'
 import { formatEuro, formatProzent } from '../engine/format'
 import { fortschritt, nettovermoegen, type Ziel } from '../engine/prognose'
 import type { Schrittplan } from '../engine/schritte'
@@ -11,15 +12,17 @@ type Props = {
   analyse: Analyse
   ziel: Ziel
   plan: Schrittplan
+  check: FinanzCheck
   istDemo: boolean
   onTab: (tab: Tab) => void
   onEinstellungen: () => void
   onAuswertung: () => void
+  onFinanzCheck: () => void
 }
 
 const UMFANG = 2 * Math.PI * 52
 
-export function Heute({ analyse, ziel, plan, istDemo, onTab, onEinstellungen, onAuswertung }: Props) {
+export function Heute({ ziel, plan, check, istDemo, onTab, onEinstellungen, onAuswertung, onFinanzCheck }: Props) {
   const anteil = fortschritt(ziel)
   const prognose = plan.soWieJetzt
   const puenktlich = prognose.monateNachZiel !== null && prognose.monateNachZiel <= 0
@@ -97,15 +100,16 @@ export function Heute({ analyse, ziel, plan, istDemo, onTab, onEinstellungen, on
         </button>
       )}
 
-      <section aria-label="Aus deiner Auswertung">
+      <section aria-label="Finanz-Check">
         <div className="heute__kacheln">
-          <Kachel label="Zum Leben" wert={formatEuro(analyse.lebenshaltungProMonat, 'ganz')} />
-          <Kachel label="Sparquote" wert={formatProzent(analyse.sparquote)} farbe={analyse.sparquote >= 0.1 ? 'gut' : 'hinweis'} />
           <Kachel
-            label="Fixkosten"
-            wert={formatProzent(analyse.fixkostenQuote)}
-            farbe={analyse.fixkostenQuote <= 0.35 ? 'gut' : analyse.fixkostenQuote <= 0.5 ? 'hinweis' : 'warnung'}
+            label="Notgroschen"
+            wert={`${new Intl.NumberFormat('de-DE', { maximumFractionDigits: 1, minimumFractionDigits: 1 }).format(check.notgroschen.monate)} Mon.`}
+            farbe={check.notgroschen.ampel}
+            onClick={onFinanzCheck}
           />
+          <Kachel label="Sparquote" wert={formatProzent(check.sparquote.wert)} farbe={check.sparquote.ampel} onClick={onFinanzCheck} />
+          <Kachel label="Fixkosten" wert={formatProzent(check.fixkosten.wert)} farbe={check.fixkosten.ampel} onClick={onFinanzCheck} />
         </div>
         <button type="button" className="textknopf heute__auswertung" onClick={onAuswertung}>
           Ganze Auswertung ansehen
@@ -117,11 +121,14 @@ export function Heute({ analyse, ziel, plan, istDemo, onTab, onEinstellungen, on
   )
 }
 
-function Kachel({ label, wert, farbe }: { label: string; wert: string; farbe?: 'gut' | 'hinweis' | 'warnung' }) {
+type KachelProps = { label: string; wert: string; farbe: 'gut' | 'hinweis' | 'warnung'; onClick: () => void }
+
+/** Kachel wie im Design; antippen öffnet den Finanz-Check. */
+function Kachel({ label, wert, farbe, onClick }: KachelProps) {
   return (
-    <div className="kachel">
-      <p className="label">{label}</p>
-      <p className={farbe ? `kachel__zahl ${farbe}` : 'kachel__zahl'}>{wert}</p>
-    </div>
+    <button type="button" className="kachel" onClick={onClick} aria-label={`${label}: ${wert}, Finanz-Check öffnen`}>
+      <span className="label">{label}</span>
+      <span className={`kachel__zahl ${farbe}`}>{wert}</span>
+    </button>
   )
 }

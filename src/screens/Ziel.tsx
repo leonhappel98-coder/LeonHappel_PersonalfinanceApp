@@ -19,7 +19,7 @@ type Props = {
 }
 
 /** Beispielperson Alex aus docs/ROADMAP.md */
-const ALEX = { depot: 31_800, tagesgeld: 2_400, zielBetrag: 100_000, zielMonat: '2030-07' }
+const ALEX = { depot: 31_800, tagesgeld: 2_400, zielBetrag: 100_000, zielMonat: '2030-07', geburtsjahr: 1997 }
 
 const alsText = (betrag: number) => new Intl.NumberFormat('de-DE', { maximumFractionDigits: 2 }).format(betrag)
 const nurZahl = (text: string) => text.replace(/[^\d.,]/g, '')
@@ -33,6 +33,8 @@ export function Ziel({ analyse, istDemo, ziel, onFertig, onZurueck, onNeueDatei,
   const [sparrate, setSparrate] = useState(alsText(start?.sparrateProMonat ?? sparenLautAuswertung))
   const [zielBetrag, setZielBetrag] = useState(alsText(start?.zielBetrag ?? 100_000))
   const [zielMonat, setZielMonat] = useState(start?.zielMonat ?? plusMonate(aktuellerMonat(), 60))
+  const [geburtsjahr, setGeburtsjahr] = useState(start?.geburtsjahr ? String(start.geburtsjahr) : '')
+  const [diesesJahr] = useState(() => new Date().getFullYear())
 
   const zahl = (text: string) => (text.trim() === '' ? 0 : leseBetrag(text))
   const werte = {
@@ -41,11 +43,14 @@ export function Ziel({ analyse, istDemo, ziel, onFertig, onZurueck, onNeueDatei,
     sparrateProMonat: zahl(sparrate),
     zielBetrag: zahl(zielBetrag),
     zielMonat,
+    geburtsjahr: geburtsjahr.trim() === '' ? undefined : Number(geburtsjahr),
   }
+
   const gueltig =
     [werte.depot, werte.tagesgeld, werte.sparrateProMonat].every((w) => !isNaN(w) && w >= 0) &&
     werte.zielBetrag > 0 &&
-    /^\d{4}-\d{2}$/.test(zielMonat)
+    /^\d{4}-\d{2}$/.test(zielMonat) &&
+    (werte.geburtsjahr === undefined || (werte.geburtsjahr >= diesesJahr - 110 && werte.geburtsjahr <= diesesJahr - 14))
 
   return (
     <main className="seite ziel">
@@ -101,6 +106,33 @@ export function Ziel({ analyse, istDemo, ziel, onFertig, onZurueck, onNeueDatei,
               <input type="month" value={zielMonat} min={aktuellerMonat()} onChange={(e) => setZielMonat(e.target.value)} />
             </span>
           </label>
+        </section>
+
+        <section className="karte" aria-labelledby="ziel-du">
+          <h2 id="ziel-du" className="label">
+            Über dich (freiwillig)
+          </h2>
+          <div className="feld">
+            <label htmlFor="geburtsjahr" className="feld__name">
+              Geburtsjahr
+            </label>
+            <span className="feld__eingabe">
+              <input
+                id="geburtsjahr"
+                type="text"
+                inputMode="numeric"
+                autoComplete="bday-year"
+                maxLength={4}
+                placeholder="z. B. 1997"
+                value={geburtsjahr}
+                onChange={(e) => setGeburtsjahr(e.target.value.replace(/\D/g, ''))}
+                aria-describedby="geburtsjahr-hilfe"
+              />
+            </span>
+            <span id="geburtsjahr-hilfe" className="feld__hilfe">
+              Für den Vergleich mit Gleichaltrigen im Finanz-Check. Bleibt auf deinem Gerät.
+            </span>
+          </div>
         </section>
 
         <div className="fusszeile-knopf">

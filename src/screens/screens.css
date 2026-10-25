@@ -1270,3 +1270,136 @@
     animation: none;
   }
 }
+
+/* ---------- Finanz-Check ---------- */
+
+.finanzcheck {
+  gap: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.finanzcheck__kennzahl {
+  gap: 8px;
+}
+
+.finanzcheck__kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.finanzcheck__ampel {
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-family: var(--schrift-mono);
+  font-size: 11px;
+  letter-spacing: 0.6px;
+}
+
+.finanzcheck__ampel--gut {
+  background: rgba(143, 191, 138, 0.16);
+  color: var(--gut);
+}
+
+.finanzcheck__ampel--hinweis {
+  background: var(--hinweis-flaeche);
+  color: var(--hinweis);
+}
+
+.finanzcheck__ampel--warnung {
+  background: var(--warnung-flaeche);
+  color: var(--warnung);
+}
+
+.finanzcheck__wert {
+  font-family: var(--schrift-serif);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.finanzcheck__skala {
+  position: relative;
+  height: 8px;
+  margin: 4px 0 16px;
+  border-radius: 4px;
+  background: var(--linie);
+}
+
+.finanzcheck__fuellung {
+  height: 100%;
+  border-radius: inherit;
+}
+
+.finanzcheck__fuellung--gut {
+  background: var(--gut);
+}
+
+.finanzcheck__fuellung--hinweis {
+  background: var(--hinweis);
+}
+
+.finanzcheck__fuellung--warnung {
+  background: var(--warnung-balken);
+}
+
+.finanzcheck__marke {
+  position: absolute;
+  top: -3px;
+  width: 2px;
+  height: 14px;
+  margin-left: -1px;
+  background: var(--text);
+  opacity: 0.6;
+}
+
+.finanzcheck__marke span {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--schrift-mono);
+  font-size: 10px;
+  color: var(--text-gedaempft);
+}
+
+.finanzcheck__text,
+.finanzcheck__vergleich {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--text-zweitrangig);
+}
+
+.finanzcheck__vergleich strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.finanzcheck__quelle {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--text-gedaempft);
+}
+
+.finanzcheck__balkenpaar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.finanzcheck__link {
+  align-self: flex-start;
+  padding: 0;
+}
+
+/* Kacheln auf „Heute“ sind antippbar */
+button.kachel {
+  min-height: 44px;
+  color: inherit;
+  font: inherit;
+}
+
+button.kachel:active {
+  background: var(--flaeche-hervorgehoben);
+}
