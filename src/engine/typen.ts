@@ -58,7 +58,7 @@ export type Rohbuchung = {
   }
 }
 
-export type Dateiformat = 'finanzguru' | 'sparkasse' | 'bank-csv'
+export type Dateiformat = 'finanzguru' | 'sparkasse' | 'ing' | 'dkb' | 'volksbank' | 'comdirect' | 'bank-csv'
 
 export type Einlesergebnis = {
   format: Dateiformat

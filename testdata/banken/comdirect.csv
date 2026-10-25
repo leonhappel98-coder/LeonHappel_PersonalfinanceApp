@@ -1,0 +1,17 @@
+;
+"Umsätze Girokonto";"Zeitraum: 30 Tage";
+"Neuer Kontostand";"1.284,24 EUR";
+
+"Buchungstag";"Wertstellung (Valuta)";"Vorgang";"Buchungstext";"Umsatz in EUR";
+"30.09.2026";"30.09.2026";"Gutschrift";"Auftraggeber: Musterfirma GmbH Buchungstext: Lohn/Gehalt 09/2026 Ref. 7Q304711";"3.020,00";
+"29.09.2026";"29.09.2026";"Kartenverfügung";"Buchungstext: REWE SAGT DANKE 4711 Ref. 3K2C290815";"-45,67";
+"28.09.2026";"28.09.2026";"Kartenverfügung";"Buchungstext: Bäckerei Müller Musterstadt Ref. 3K2C280815";"-3,50";
+"25.09.2026";"25.09.2026";"Gutschrift";"Auftraggeber: Jonas Keller Buchungstext: Konzertkarte zurück Ref. 7Q254711";"15,00";
+"20.09.2026";"20.09.2026";"Lastschrift / Belastung";"Auftraggeber: Netflix International B.V. Buchungstext: Netflix Monatsabo Ref. 7Q204711";"-13,99";
+"15.09.2026";"15.09.2026";"Lastschrift / Belastung";"Auftraggeber: Lieferando.de Buchungstext: Lieferando Bestellung 98765 Ref. 7Q154711";"-24,90";
+"10.09.2026";"10.09.2026";"Kartenverfügung";"Buchungstext: DB Vertrieb GmbH//Musterstadt/DE DB Fahrkarte Musterstadt-Berlin Ref. 3K2C100815";"-39,90";
+"05.09.2026";"05.09.2026";"Auszahlung GAA";"Buchungstext: Bargeldauszahlung GA 0412 Ref. 3K2C050815";"-100,00";
+"03.09.2026";"03.09.2026";"Übertrag / Überweisung";"Empfänger: Alex Beispiel Kto/IBAN: DE00100500000687654321 BLZ/BIC: GENODEF1N02 Buchungstext: Übertrag Tagesgeld Ref. 9X031234";"-200,00";
+"01.09.2026";"01.09.2026";"Übertrag / Überweisung";"Empfänger: Hausverwaltung Berger Kto/IBAN: DE00086211823398454615 BLZ/BIC: GENODEF1N02 Buchungstext: Miete inkl. NK Whg 3 OG links Ref. 9X011234";"-980,00";
+
+"Alter Kontostand";"513,05 EUR";

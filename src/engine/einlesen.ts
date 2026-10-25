@@ -11,7 +11,10 @@ type Tabelle = Zelle[][]
 export type Spaltenzuordnung = {
   datum: number
   betrag: number
-  gegenpartei: number
+  /** Fehlt bei comdirect: Dort steht der Name im Buchungstext. */
+  gegenpartei?: number
+  /** DKB: eigene Spalte für den Zahler. Bei Geldeingängen ist er die Gegenpartei. */
+  zahler?: number
   zweck: number
   iban?: number
   konto?: number
@@ -39,7 +42,7 @@ export function leseDatei(daten: ArrayBuffer, spalten?: Spaltenzuordnung): Einle
 
   if (kopf.includes('Analyse-Hauptkategorie')) return leseFinanzguru(kopf, zeilen)
 
-  const format: Dateiformat = kopf.includes('Auftragskonto') && kopf.includes('Buchungstag') ? 'sparkasse' : 'bank-csv'
+  const format = erkenneBank(kopf)
   const zuordnung = spalten ?? erkenneSpalten(kopf)
   if (!zuordnung) throw new SpaltenUnbekanntFehler(kopf, zeilen.slice(0, 5).map((z) => z.map(text)))
   return leseBanktabelle(format, zuordnung, zeilen)
@@ -145,6 +148,18 @@ function leseFinanzguru(kopf: string[], zeilen: Tabelle): Einlesergebnis {
 
 // ---------- Bank-CSV ----------
 
+/** Erkennt die Bank an typischen Spaltennamen (testdata/banken/README.md). */
+function erkenneBank(kopf: string[]): Dateiformat {
+  const k = kopf.map(normal)
+  const hat = (name: string) => k.includes(name)
+  if (hat('auftragskonto') && hat('buchungstag')) return 'sparkasse'
+  if (hat('name zahlungsbeteiligter')) return 'volksbank'
+  if (hat('zahlungsempfaenger*in') || hat('auftraggeber / beguenstigter')) return 'dkb'
+  if (hat('auftraggeber/empfaenger') && hat('buchung')) return 'ing'
+  if (hat('vorgang') && k.some((s) => s.startsWith('umsatz in '))) return 'comdirect'
+  return 'bank-csv'
+}
+
 /** Bekannte Spaltennamen verschiedener Banken (klein, ohne Umlaute), wichtigste zuerst. */
 const SPALTENNAMEN = {
   datum: ['buchungstag', 'buchungsdatum', 'buchung', 'datum', 'wertstellung', 'valutadatum', 'valuta', 'date'],
@@ -152,6 +167,7 @@ const SPALTENNAMEN = {
   gegenpartei: [
     'beguenstigter/zahlungspflichtiger',
     'auftraggeber/empfaenger',
+    'auftraggeber / beguenstigter',
     'zahlungsempfaenger*in',
     'zahlungspflichtige*r',
     'empfaenger',
@@ -162,7 +178,7 @@ const SPALTENNAMEN = {
     'payee',
   ],
   zweck: ['verwendungszweck', 'beschreibung', 'zweck', 'buchungsdetails', 'description', 'buchungstext'],
-  iban: ['kontonummer/iban', 'iban zahlungsbeteiligter', 'iban', 'gegenkonto'],
+  iban: ['kontonummer/iban', 'iban zahlungsbeteiligter', 'iban', 'gegenkonto', 'kontonummer'],
   konto: ['auftragskonto', 'iban auftragskonto', 'konto'],
   buchungstext: ['buchungstext', 'umsatzart', 'umsatztyp', 'vorgang'],
 }
@@ -178,7 +194,7 @@ function normal(s: string): string {
     .trim()
 }
 
-/** Sucht die Spalten über die Namensliste. Null, wenn Datum, Betrag oder Empfänger fehlen. */
+/** Sucht die Spalten über die Namensliste. Null, wenn Datum, Betrag oder Empfänger/Buchungstext fehlen. */
 export function erkenneSpalten(kopf: string[]): Spaltenzuordnung | null {
   const normiert = kopf.map(normal)
   const vergeben = new Set<number>()
@@ -199,8 +215,12 @@ export function erkenneSpalten(kopf: string[]): Spaltenzuordnung | null {
   const buchungstext = finde(SPALTENNAMEN.buchungstext)
   const iban = finde(SPALTENNAMEN.iban)
   const konto = finde(SPALTENNAMEN.konto)
-  if (datum === undefined || betrag === undefined || gegenpartei === undefined) return null
-  return { datum, betrag, gegenpartei, zweck: zweck ?? gegenpartei, iban, konto, buchungstext }
+  // DKB: Zahler und Empfänger in getrennten Spalten
+  const zahler = gegenpartei !== undefined && normiert[gegenpartei] === 'zahlungsempfaenger*in' ? finde(['zahlungspflichtige*r']) : undefined
+  if (datum === undefined || betrag === undefined) return null
+  // Ohne Empfänger-Spalte (comdirect) muss der Name im Buchungstext stehen
+  if (gegenpartei === undefined && zweck === undefined) return null
+  return { datum, betrag, gegenpartei, zahler, zweck: zweck ?? gegenpartei!, iban, konto, buchungstext }
 }
 
 function leseBanktabelle(format: Dateiformat, s: Spaltenzuordnung, zeilen: Tabelle): Einlesergebnis {
@@ -210,19 +230,41 @@ function leseBanktabelle(format: Dateiformat, s: Spaltenzuordnung, zeilen: Tabel
     const datum = leseDatum(zeile[s.datum])
     const betrag = leseBetrag(zeile[s.betrag])
     if (!datum || isNaN(betrag)) return
+    // DKB: Bei Geldeingängen ist der Zahler die Gegenpartei
+    const name = s.zahler !== undefined && betrag > 0 ? feld(zeile, s.zahler) : feld(zeile, s.gegenpartei)
+    const imText = s.gegenpartei === undefined ? zerlegeBuchungstext(feld(zeile, s.zweck)) : undefined
     buchungen.push({
       id: `${format}-${i}`,
       datum,
       betrag,
-      gegenpartei: feld(zeile, s.gegenpartei),
-      zweck: feld(zeile, s.zweck),
+      gegenpartei: imText ? imText.gegenpartei : name,
+      zweck: imText ? imText.zweck : feld(zeile, s.zweck),
       konto: feld(zeile, s.konto),
-      iban: ohneLeerzeichen(feld(zeile, s.iban)),
+      iban: ohneLeerzeichen(imText?.iban || feld(zeile, s.iban)),
       buchungstext: feld(zeile, s.buchungstext),
     })
   })
   const eigeneKonten = [...new Set(buchungen.map((b) => ohneLeerzeichen(b.konto)).filter(Boolean))]
   return { format, buchungen, eigeneKonten }
+}
+
+/**
+ * comdirect schreibt alles in eine Spalte, z. B.
+ * „Empfänger: Hausverwaltung Berger Kto/IBAN: DE00… BLZ/BIC: … Buchungstext: Miete Oktober Ref. 9X…“.
+ */
+export function zerlegeBuchungstext(text: string): { gegenpartei: string; zweck: string; iban: string } {
+  const teile = new Map<string, string>()
+  const muster = /(Auftraggeber:|Empfänger:|Kto\/IBAN:|BLZ\/BIC:|Buchungstext:|Ref\.)/g
+  const treffer = [...text.matchAll(muster)]
+  treffer.forEach((t, i) => {
+    const ende = treffer[i + 1]?.index ?? text.length
+    teile.set(t[1], text.slice(t.index! + t[1].length, ende).trim())
+  })
+  return {
+    gegenpartei: teile.get('Auftraggeber:') ?? teile.get('Empfänger:') ?? '',
+    zweck: teile.get('Buchungstext:') ?? (treffer.length > 0 ? '' : text),
+    iban: teile.get('Kto/IBAN:') ?? '',
+  }
 }
 
 function ohneLeerzeichen(s: string): string {

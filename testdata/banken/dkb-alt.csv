@@ -1,0 +1,17 @@
+"Kontonummer:";"DE00120300001234567890 / Girokonto";
+
+"Von:";"01.09.2026";
+"Bis:";"30.09.2026";
+"Kontostand vom 30.09.2026:";"1.284,24 EUR";
+
+"Buchungstag";"Wertstellung";"Buchungstext";"Auftraggeber / Begünstigter";"Verwendungszweck";"Kontonummer";"BLZ";"Betrag (EUR)";"Gläubiger-ID";"Mandatsreferenz";"Kundenreferenz";
+"30.09.2026";"30.09.2026";"Gutschrift";"Musterfirma GmbH";"Lohn/Gehalt 09/2026";"DE00180170462265676618";"";"3.020,00";"";"";"";
+"29.09.2026";"29.09.2026";"Kartenzahlung";"REWE Markt";"REWE SAGT DANKE 4711";"";"";"-45,67";"";"";"";
+"28.09.2026";"28.09.2026";"Kartenzahlung";"Bäckerei Müller";"Bäckerei Müller Musterstadt";"";"";"-3,50";"";"";"";
+"25.09.2026";"25.09.2026";"Gutschrift";"Jonas Keller";"Konzertkarte zurück";"DE00533756569764878496";"";"15,00";"";"";"";
+"20.09.2026";"20.09.2026";"Folgelastschrift";"Netflix International B.V.";"Netflix Monatsabo";"DE00660000000000123456";"";"-13,99";"";"";"";
+"15.09.2026";"15.09.2026";"Folgelastschrift";"Lieferando.de";"Lieferando Bestellung 98765";"DE00700000000000654321";"";"-24,90";"";"";"";
+"10.09.2026";"10.09.2026";"Kartenzahlung";"DB Vertrieb GmbH";"DB Fahrkarte Musterstadt-Berlin";"";"";"-39,90";"";"";"";
+"05.09.2026";"05.09.2026";"Barauszahlung";"Geldautomat";"Bargeldauszahlung GA 0412";"";"";"-100,00";"";"";"";
+"03.09.2026";"03.09.2026";"Überweisung";"Alex Beispiel";"Übertrag Tagesgeld";"DE00100500000687654321";"";"-200,00";"";"";"";
+"01.09.2026";"01.09.2026";"Dauerauftrag";"Hausverwaltung Berger";"Miete inkl. NK Whg 3 OG links";"DE00086211823398454615";"";"-980,00";"";"";"";

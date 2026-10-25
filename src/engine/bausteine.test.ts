@@ -167,7 +167,7 @@ describe('Andere Banken', () => {
       '23.10.2026;23.10.2026;REWE Markt;Lastschrift;Einkauf;100,00;EUR;-12,34;EUR',
     ].join('\n')
     const { format, buchungen } = leseDatei(alsDatei(csv))
-    expect(format).toBe('bank-csv')
+    expect(format).toBe('ing')
     expect(buchungen[0]).toMatchObject({ datum: '2026-10-23', betrag: -12.34, gegenpartei: 'REWE Markt', zweck: 'Einkauf' })
   })
 

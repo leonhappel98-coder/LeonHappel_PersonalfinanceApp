@@ -8,6 +8,7 @@ Alles läuft lokal im Browser. Eingabe: eine Datei. Ausgabe: ein `Analyse`-Objek
 | --- | --- | --- |
 | Finanzguru-Excel (.xlsx) | Kopfzeile enthält `Analyse-Hauptkategorie` | Ein Blatt, eine Zeile pro Buchung, mehrere Konten (`Name Referenzkonto`). Datum als Excel-Datum. |
 | Sparkasse-CSV (CAMT V2) | Kopfzeile enthält `Auftragskonto` und `Buchungstag` | Semikolon, Felder in Anführungszeichen, Datum `TT.MM.JJ`, Betrag `-1.234,56`, Kodierung oft Windows-1252. |
+| ING, DKB (neu und alt), Volksbank, comdirect | typische Spaltennamen (siehe `testdata/banken/README.md`) | DKB neu: Zahler und Empfänger getrennt, bei Eingängen ist der Zahler die Gegenpartei. comdirect: Name, IBAN und Zweck stehen im Buchungstext („Auftraggeber:“, „Empfänger:“, „Kto/IBAN:“, „Buchungstext:“). Tests: `src/engine/banken.test.ts`. |
 | Andere Bank-CSV | sonst | Trennzeichen erkennen (`;` oder `,`), Spalten für Datum, Betrag, Empfänger, Verwendungszweck per Namensliste suchen (z. B. ING: `Buchung`, `Auftraggeber/Empfänger`, `Betrag`; DKB: `Buchungsdatum`, `Zahlungsempfänger*in`, `Betrag (€)`). Findet sich keine Zuordnung: Nutzer wählt die Spalten in einem kleinen Dialog. |
 
 Text-Kodierung: erst UTF-8 versuchen; enthält das Ergebnis `�`, mit `windows-1252` neu dekodieren. Zahlen: Tausenderpunkte entfernen, Komma zu Punkt. Datum: `TT.MM.JJ`, `TT.MM.JJJJ`, ISO und Excel-Seriennummer.

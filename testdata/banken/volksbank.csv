@@ -1,0 +1,11 @@
+﻿Bezeichnung Auftragskonto;IBAN Auftragskonto;BIC Auftragskonto;Bankname Auftragskonto;Buchungstag;Valutadatum;Name Zahlungsbeteiligter;IBAN Zahlungsbeteiligter;BIC (SWIFT-Code) Zahlungsbeteiligter;Buchungstext;Verwendungszweck;Betrag;Waehrung;Saldo nach Buchung;Bemerkung;Gekennzeichneter Umsatz;Glaeubiger ID;Mandatsreferenz
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;30.09.2026;30.09.2026;Musterfirma GmbH;DE00180170462265676618;;Gehalt/Rente;Lohn/Gehalt 09/2026;3.020,00;EUR;1.284,24;;;;
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;29.09.2026;29.09.2026;REWE Markt;;;Kartenzahlung girocard;REWE SAGT DANKE 4711;-45,67;EUR;1.284,24;;;;
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;28.09.2026;28.09.2026;Bäckerei Müller;;;Kartenzahlung girocard;Bäckerei Müller Musterstadt;-3,50;EUR;1.284,24;;;;
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;25.09.2026;25.09.2026;Jonas Keller;DE00533756569764878496;;Gutschrift;Konzertkarte zurück;15,00;EUR;1.284,24;;;;
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;20.09.2026;20.09.2026;Netflix International B.V.;DE00660000000000123456;;Lastschrift;Netflix Monatsabo;-13,99;EUR;1.284,24;;;;
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;15.09.2026;15.09.2026;Lieferando.de;DE00700000000000654321;;Lastschrift;Lieferando Bestellung 98765;-24,90;EUR;1.284,24;;;;
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;10.09.2026;10.09.2026;DB Vertrieb GmbH;;;Kartenzahlung girocard;DB Fahrkarte Musterstadt-Berlin;-39,90;EUR;1.284,24;;;;
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;05.09.2026;05.09.2026;Geldautomat;;;Auszahlung Geldautomat;Bargeldauszahlung GA 0412;-100,00;EUR;1.284,24;;;;
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;03.09.2026;03.09.2026;Alex Beispiel;DE00100500000687654321;;Überweisung;Übertrag Tagesgeld;-200,00;EUR;1.284,24;;;;
+Girokonto;DE00760600000012345678;GENODEF1N02;Volksbank Musterstadt;01.09.2026;01.09.2026;Hausverwaltung Berger;DE00086211823398454615;;Dauerauftrag;Miete inkl. NK Whg 3 OG links;-980,00;EUR;1.284,24;;;;

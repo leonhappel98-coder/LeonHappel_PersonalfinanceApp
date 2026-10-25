@@ -1,0 +1,25 @@
+Umsatzanzeige;Datei erstellt am: 30.09.2026 18:12
+;Letztes Update: aktuell
+
+IBAN;DE00 5001 0517 1234 5678 90
+Kontoname;Girokonto
+Bank;ING
+Kunde;Alex Beispiel
+Zeitraum;01.09.2026 - 30.09.2026
+Saldo;1.284,24;EUR
+
+Sortierung;Datum absteigend
+
+In der CSV-Datei finden Sie alle bereits gebuchten Umsätze. Die vorgemerkten Umsätze werden nicht aufgenommen, auch wenn sie in Ihrem Internetbanking angezeigt werden.
+
+Buchung;Wertstellungsdatum;Auftraggeber/Empfänger;Buchungstext;Verwendungszweck;Saldo;Währung;Betrag;Währung
+30.09.2026;30.09.2026;Musterfirma GmbH;Gehalt/Rente;Lohn/Gehalt 09/2026;1.000,00;EUR;3.020,00;EUR
+29.09.2026;29.09.2026;VISA REWE MARKT;Lastschrift;REWE SAGT DANKE 4711;1.000,00;EUR;-45,67;EUR
+28.09.2026;28.09.2026;VISA BÄCKEREI MÜLLER;Lastschrift;Bäckerei Müller Musterstadt;1.000,00;EUR;-3,50;EUR
+25.09.2026;25.09.2026;Jonas Keller;Gutschrift;Konzertkarte zurück;1.000,00;EUR;15,00;EUR
+20.09.2026;20.09.2026;Netflix International B.V.;Lastschrift;Netflix Monatsabo;1.000,00;EUR;-13,99;EUR
+15.09.2026;15.09.2026;Lieferando.de;Lastschrift;Lieferando Bestellung 98765;1.000,00;EUR;-24,90;EUR
+10.09.2026;10.09.2026;VISA DB VERTRIEB GMBH;Lastschrift;DB Fahrkarte Musterstadt-Berlin;1.000,00;EUR;-39,90;EUR
+05.09.2026;05.09.2026;Geldautomat;Bargeldauszahlung;Bargeldauszahlung GA 0412;1.000,00;EUR;-100,00;EUR
+03.09.2026;03.09.2026;Alex Beispiel;Überweisung;Übertrag Tagesgeld;1.000,00;EUR;-200,00;EUR
+01.09.2026;01.09.2026;Hausverwaltung Berger;Dauerauftrag;Miete inkl. NK Whg 3 OG links;1.000,00;EUR;-980,00;EUR
