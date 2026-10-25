@@ -1403,3 +1403,50 @@ button.kachel {
 button.kachel:active {
   background: var(--flaeche-hervorgehoben);
 }
+
+/* ---------- Was wäre, wenn …? ---------- */
+
+.waswaere {
+  gap: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.waswaere .fusszeile-knopf {
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.waswaere__neutral {
+  color: var(--text-gedaempft);
+}
+
+.waswaere__regler {
+  gap: 14px;
+}
+
+.schieber {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.schieber input[type='range'] {
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  accent-color: var(--akzent);
+  cursor: pointer;
+}
+
+.waswaere__warnung {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--hinweis);
+}
+
+.prognose__waswaere {
+  margin-top: 2px;
+}

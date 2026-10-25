@@ -12,11 +12,12 @@ type Props = {
   ziel: Ziel
   istDemo: boolean
   onTab: (tab: Tab) => void
+  onWasWaere: () => void
 }
 
 const NAMEN: Record<Szenario, string> = { vorsichtig: 'Vorsichtig', realistisch: 'Realistisch', optimistisch: 'Optimistisch' }
 
-export function Prognose({ ziel, istDemo, onTab }: Props) {
+export function Prognose({ ziel, istDemo, onTab, onWasWaere }: Props) {
   const [szenario, setSzenario] = useState<Szenario>('realistisch')
   const start = aktuellerMonat()
 
@@ -80,6 +81,10 @@ export function Prognose({ ziel, istDemo, onTab }: Props) {
           <p className="prognose__annahmen">{Math.round(gewaehlt.rendite * 100)} % Rendite, Sparrate bleibt gleich</p>
         </div>
       </div>
+
+      <button type="button" className="knopf prognose__waswaere" onClick={onWasWaere}>
+        Was wäre, wenn …?
+      </button>
 
       <p className="prognose__hinweis">
         Eine Rechnung mit Annahmen, keine Garantie und keine Anlageberatung. Das Tagesgeld rechnet ohne Zinsen.

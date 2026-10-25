@@ -13,11 +13,12 @@ import { Heute } from './screens/Heute'
 import { Prognose } from './screens/Prognose'
 import { Schritte } from './screens/Schritte'
 import { Start } from './screens/Start'
+import { WasWaere } from './screens/WasWaere'
 import { Ziel } from './screens/Ziel'
 import { ladeZustand, loescheAlles, speichereZustand, type Gespeichert } from './storage/speicher'
 import { aktuellerMonat } from './ui/texte'
 
-type Screen = 'start' | 'analyse' | 'ergebnis' | 'ziel' | 'heute' | 'schritte' | 'prognose' | 'finanzcheck'
+type Screen = 'start' | 'analyse' | 'ergebnis' | 'ziel' | 'heute' | 'schritte' | 'prognose' | 'finanzcheck' | 'waswaere'
 
 const BEISPIEL_NAME = 'kontoexport_alex_finanzguru.xlsx'
 
@@ -215,7 +216,20 @@ export default function App() {
 
   if (ziel && plan && screen === 'prognose') {
     // Erledigte Schritte erhöhen die Sparrate ins Depot.
-    return <Prognose ziel={{ ...ziel, sparrateProMonat: plan.sparrateJetzt }} istDemo={istDemo} onTab={gehe} />
+    return (
+      <Prognose ziel={{ ...ziel, sparrateProMonat: plan.sparrateJetzt }} istDemo={istDemo} onTab={gehe} onWasWaere={() => gehe('waswaere')} />
+    )
+  }
+
+  if (analyse && ziel && plan && screen === 'waswaere') {
+    return (
+      <WasWaere
+        analyse={analyse}
+        ziel={{ ...ziel, sparrateProMonat: plan.sparrateJetzt }}
+        istDemo={istDemo}
+        onZurueck={() => window.history.back()}
+      />
+    )
   }
 
   return (
