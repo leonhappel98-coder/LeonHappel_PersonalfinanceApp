@@ -24,3 +24,13 @@ export const SZENARIO_RENDITE = {
 
 /** So weit rechnet die Prognose höchstens voraus. */
 export const PROGNOSE_MAX_JAHRE = 50
+
+/** Nächste Schritte (Phase 3) */
+export const SCHRITTE = {
+  /** So viel kostet ein günstiger Handytarif im Monat (€). */
+  mobilfunkZieltarif: 15,
+  /** Ab so viel €/Monat für Lieferdienste und Restaurants wird „halbieren“ vorgeschlagen. */
+  auswaertsMindestens: 50,
+  /** Notgroschen = so viele Monate Lebenshaltung + Fixkosten. */
+  notgroschenMonate: 3,
+} as const

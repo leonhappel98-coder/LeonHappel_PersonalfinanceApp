@@ -105,3 +105,29 @@ Eingabe: Depotwert, Tagesgeld (flüssig), Sparrate pro Monat (vorbelegt mit „S
 Ehrlich rechnen: Die Design-Bilder zeigen für Alex „Okt 2030“; mit seinen echten Zahlen (Sparplan 420 €/Monat) kommt etwas Späteres heraus. Die App zeigt das echte Ergebnis.
 
 Abnahme mit Alex (Start Okt 2026, Depot 31.800 €, Tagesgeld 2.400 €, Sparrate 420 €, Ziel 100.000 € bis Juli 2030): Die Werte stehen in `src/engine/prognose.test.ts` und wurden unabhängig nachgerechnet.
+
+## 10. Nächste Schritte (Phase 3)
+
+Die App schlägt Schritte aus Auswertung und Ziel vor. Jeder Schritt hat eine Wirkung in €/Monat (außer Absicherung). Gespartes Geld fließt annahmegemäß zusätzlich ins Depot.
+
+| Schritt | Wann | Wirkung pro Monat |
+| --- | --- | --- |
+| Notgroschen aufbauen (Absicherung) | Tagesgeld < 3 × (Lebenshaltung + Fixkosten) | keine; Text: „Flüssig sind X €, das reicht für N Tage.“ plus die noch offenen Etappen (500 €, 1.000 €, ein Monat, drei Monate), z. B. „Erst einen Monat (2.600 €), dann drei Monate.“ |
+| Handytarif wechseln | Hinweis „Tarif prüfen“ (Mobilfunk > 25 €) | Betrag − 15 € (Zieltarif in `config.ts`) |
+| Ein Streaming-Abo kündigen | Hinweis „doppelt?“ | Betrag des teuersten Streaming-Abos |
+| Lieferdienste und Restaurants halbieren | Auswärts essen ≥ 50 €/Monat | Hälfte davon |
+
+- „Ziel X Monate früher“ = Monate bis zum Ziel (realistisch) mit heutiger Sparrate minus Monate mit Sparrate + Wirkung.
+- Erledigte Schritte zählen zur Sparrate („So wie jetzt“, Heute, Prognose). „Mit allen Schritten“ rechnet zusätzlich alle offenen Schritte ein.
+- „Diese Woche“ bekommen der Notgroschen und der offene Ausgaben-Schritt mit der größten Wirkung.
+
+Abnahme mit Alex (Sparrate 420 €, realistisch Dez 2034): Handytarif +24,99 € → 3 Monate früher; Streaming +13,99 € → 2 Monate früher; Auswärts essen +105 € → 13 Monate früher; Notgroschen 7.800 €, 2.400 € reichen für 28 Tage; alle offenen Schritte zusammen +143,98 € → Jul 2033.
+
+## 11. KI-Prompt (Phase 3)
+
+Ein Text, den der Nutzer selbst in sein Claude oder ChatGPT kopiert. Die App sendet nichts.
+
+- Drin: Zeitraum in Monaten, Nettoeinkommen, Lebenshaltung je Kategorie und Unterkategorie, Fixkosten je Unterkategorie, Einmaleffekte als eine Summe, Sparquote, Fixkostenquote, Vermögen, Ziel, Prognose (Jahr/Monat), Hinweise ohne Händlernamen.
+- Gerundet: Monatsbeträge auf 10 €, Vermögen und Ziel auf 1.000 €, Quoten auf ganze Prozent.
+- Nie drin: Namen (auch keine Händler), IBAN, Verwendungszweck, einzelne Buchungen, Datum einzelner Buchungen.
+- Sensible Unterkategorien (Gesundheit, Arzt, Apotheke, Spenden, Kirche, Gewerkschaft, Partei, Mitgliedschaften) werden vorher unter „Sonstiges“ zusammengefasst.
