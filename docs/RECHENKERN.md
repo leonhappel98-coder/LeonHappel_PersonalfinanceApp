@@ -158,3 +158,11 @@ Vier Regler, Startwerte aus Auswertung und Ziel: Netto-Gehalt (Nettoeinkommen pr
 - Die Regler werden nicht gespeichert (Spielwiese).
 
 Abnahme mit Alex: ohne Änderung Dez 2034 (= realistisch); Ausgaben 2.495 € → Sparrate 525 € → Nov 2033 (= Schritt „auswärts essen halbieren“); Rendite 7 % → Dez 2033 (= optimistisch); Sparrate 800 € → 380 € aus dem Tagesgeld.
+
+## 14. Monatlicher Import (Phase 6)
+
+- Neue Exporte ergänzen die gespeicherten Buchungen (Entscheidung Leon). Doppelt = gleiches Datum, gleicher Betrag, gleiche Gegenpartei, gleicher Verwendungszweck – verglichen wird nur alt gegen neu, gleiche Buchungen innerhalb einer Datei bleiben.
+- Die Auswertung rechnet immer über die letzten 12 Monate bis zur neuesten Buchung (`letzte12Monate`), Abschnitt 6 gilt unverändert.
+- Verträge werden pro Buchung erkannt: Finanzguru-Buchungen bringen sie mit, Bankbuchungen nach Abschnitt 3. So funktionieren auch gemischte Importe.
+
+Abnahme: Finanzguru-Excel, dann Sparkasse-CSV von Alex → 1.265 doppelt, 0 neu, weiter 1.284 Buchungen und 1.360 € Lebenshaltung.

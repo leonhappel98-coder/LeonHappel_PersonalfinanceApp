@@ -17,7 +17,8 @@ export function ordneEin(eingelesen: Einlesergebnis, optionen: Optionen = {}): B
   const buchungen = eingelesen.buchungen.map((roh) =>
     roh.finanzguru ? ausFinanzguru(roh) : ausBankdaten(roh, eigeneKonten, optionen),
   )
-  if (eingelesen.format !== 'finanzguru') {
+  // Bankdaten selbst prüfen; Finanzguru-Buchungen bringen ihre Verträge schon mit (auch gemischt nach mehreren Importen)
+  if (eingelesen.buchungen.some((roh) => !roh.finanzguru)) {
     erkenneVertraege(buchungen, eingelesen.buchungen)
     erkenneMiete(buchungen, eingelesen.buchungen)
   }
@@ -106,7 +107,7 @@ function vertragsSchluessel(gegenpartei: string, betrag: number): string {
 function erkenneVertraege(buchungen: Buchung[], roh: Rohbuchung[]): void {
   const gruppen = new Map<string, number[]>()
   buchungen.forEach((b, i) => {
-    if (b.betrag >= 0 || b.istUmbuchung || b.unterkategorie === 'Bargeld' || !b.gegenpartei) return
+    if (roh[i].finanzguru || b.betrag >= 0 || b.istUmbuchung || b.unterkategorie === 'Bargeld' || !b.gegenpartei) return
     const schluessel = normalisiere(b.gegenpartei)
     gruppen.set(schluessel, [...(gruppen.get(schluessel) ?? []), i])
   })
