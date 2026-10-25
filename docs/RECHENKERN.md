@@ -166,3 +166,14 @@ Abnahme mit Alex: ohne Änderung Dez 2034 (= realistisch); Ausgaben 2.495 € �
 - Verträge werden pro Buchung erkannt: Finanzguru-Buchungen bringen sie mit, Bankbuchungen nach Abschnitt 3. So funktionieren auch gemischte Importe.
 
 Abnahme: Finanzguru-Excel, dann Sparkasse-CSV von Alex → 1.265 doppelt, 0 neu, weiter 1.284 Buchungen und 1.360 € Lebenshaltung.
+
+## 15. Budgets mit Tempo-Markierung (Phase 6)
+
+- Budget je Alltagskategorie (Essen & Trinken, Mobilität, Freizeit, Shopping, Sonstiges). Startwert: 10 % unter dem Monatsschnitt, abgerundet auf 10 € (Entscheidung Leon), danach frei änderbar.
+- Monat: der aktuelle Monat, wenn es darin Buchungen gibt; sonst der Monat der neuesten Buchung (dann komplett vorbei).
+- Tempo = Tag ÷ Tage im Monat. Ausgegeben ÷ Budget ≤ Tempo → grün, ≤ 100 % → gelb, darüber rot.
+- Ausgegeben = alle Ausgaben der Kategorie im Monat außer Umbuchungen, Sparen und Fixkosten (Einmaleffekte zählen mit).
+- Fixkosten-Zeilen (Wohnen, Verträge & Abos): Ausgaben im Monat gegen den Monatsschnitt, ohne Ampel.
+- Satz: „Gut im Plan.“ (gesamt ≤ Tempo), „Fast im Plan.“ (≤ 100 %), „Über dem Budget.“ – dazu, was drüber ist und wo am meisten Luft bleibt.
+
+Abnahme mit Alex (Stand 25.10.2026): Budgets 460/150/230/210/150 = 1.200 €; ausgegeben 385,86 / 165,82 / 234,17 / 84,17 / 139,64 = 1.009,66 €; „Fast im Plan. Mobilität und Freizeit sind drüber, Shopping hat noch 126 € Luft.“
