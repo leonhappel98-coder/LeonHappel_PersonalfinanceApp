@@ -1,0 +1,25 @@
+# KI-Server für „KI-Analyse starten“ (Cloudflare Worker).
+# Schickt die anonyme Zusammenfassung an Claude und gibt Vorschläge zurück. Speichert keine Inhalte.
+name = "kurs-ki"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+# Keine Protokolle von Anfragen (Inhalte werden nie geloggt)
+[observability]
+enabled = false
+
+[vars]
+# Nur diese Adressen dürfen den Server nutzen (Komma-getrennt)
+ERLAUBTE_HERKUNFT = "https://leonhappel98-coder.github.io,http://localhost:5173,http://localhost:4173"
+# Analysen pro Gerät und Tag
+LIMIT_PRO_GERAET = "5"
+# Analysen pro Tag für alle zusammen (Schutz für das Guthaben)
+LIMIT_GESAMT = "200"
+
+# Zähler für die Tageslimits. Die ID trägt Claude ein, nachdem Leon „npx wrangler login“ gemacht hat.
+[[kv_namespaces]]
+binding = "ZAEHLER"
+id = "HIER_KOMMT_DIE_KV_ID_HIN"
+
+# Der API-Schlüssel steht NICHT hier. Leon trägt ihn selbst ein mit:
+#   npx wrangler secret put ANTHROPIC_API_KEY

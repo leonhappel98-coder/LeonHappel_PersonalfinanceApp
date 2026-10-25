@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# KI-Server: lokale Geheimnisse und Arbeitsordner nie hochladen
+.dev.vars
+.wrangler

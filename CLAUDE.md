@@ -14,11 +14,14 @@ App-Name: zentral in `src/config.ts` als `APP_NAME`, aktuell **„Kurs“** (Arb
 
 ## Unverhandelbare Regeln: Datenschutz
 
-1. **Kontodaten verlassen nie das Gerät.** Kein Server, keine API-Aufrufe mit Nutzerdaten, kein Upload, keine Analyse-Tools, keine Tracker, keine Cookies.
+1. **Kontodaten verlassen nie das Gerät.** Kein Upload von Dateien oder Buchungen, keine Analyse-Tools, keine Tracker, keine Cookies. Einzige Ausnahme: die KI-Analyse (Regel 4).
 2. **Keine externen Quellen zur Laufzeit.** Schriften selbst ausliefern (`@fontsource/...`), keine CDNs, kein Google Fonts.
 3. **Speicher nur lokal:** IndexedDB im Browser. Backup als JSON-Datei, die der Nutzer selbst speichert und wieder einliest.
-4. **KI nur über „KI-Prompt kopieren“:** Die App baut einen Text mit gerundeten Summen, den der Nutzer selbst in sein Claude oder ChatGPT kopiert. Darin nie: Namen, IBAN, Verwendungszweck, einzelne Buchungen, Datum einzelner Buchungen. Gesundheit, Spenden, Kirche, Gewerkschaft, Partei vorher unter „Sonstiges“ zusammenfassen.
-5. Prüfe vor jedem Release im Netzwerk-Tab, dass beim Import keine Anfrage rausgeht.
+4. **KI nur mit anonymer Zusammenfassung** (Entscheidung Leon, Phase 3): Die App baut einen Text mit gerundeten Summen (`src/engine/kiPrompt.ts`). Darin nie: Namen, IBAN, Verwendungszweck, einzelne Buchungen, Datum einzelner Buchungen. Gesundheit, Spenden, Kirche, Gewerkschaft, Partei vorher unter „Sonstiges“ zusammenfassen. Zwei Wege:
+   - „KI-Prompt kopieren“: Der Nutzer kopiert den Text selbst in sein Claude oder ChatGPT.
+   - „KI-Analyse starten“: Die App zeigt **vor jedem Senden** genau diesen Text und schickt ihn erst nach „Senden“ über unseren eigenen KI-Server (`ki-server/`, Cloudflare Worker) an Claude. Der Server speichert und protokolliert keine Inhalte, hält den API-Schlüssel geheim und begrenzt die Anfragen. Ohne Zustimmung geht nichts raus.
+5. Prüfe vor jedem Release im Netzwerk-Tab, dass beim Import und ohne „Senden“ keine Anfrage rausgeht.
+6. Vor öffentlichem Start (Phase 7): Datenschutzerklärung mit Hinweis auf die KI-Analyse (Empfänger Anthropic, USA) und rechtliche Prüfung.
 
 ## Technik
 

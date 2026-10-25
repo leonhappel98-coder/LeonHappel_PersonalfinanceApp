@@ -28,6 +28,9 @@ jobs:
       - run: npm ci
       - name: Tests
         run: npm test
+      - name: Tests KI-Server
+        working-directory: ki-server
+        run: npm ci && npm run typecheck && npm test
       - name: App bauen
         run: npm run build
         env:
