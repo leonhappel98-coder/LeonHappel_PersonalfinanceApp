@@ -4,8 +4,10 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { APP_BESCHREIBUNG, APP_NAME } from './src/config.ts'
 
-// Bauanleitung der App. Später für GitHub Pages: `base` auf den Repository-Namen setzen.
+// Bauanleitung der App.
 export default defineConfig({
+  // Unterordner der Adresse. Lokal „/“, auf GitHub Pages setzt die Bauanleitung (.github/workflows) z. B. „/personal-finance-app/“.
+  base: process.env.BASE_PATH ?? '/',
   plugins: [
     react(),
     {
