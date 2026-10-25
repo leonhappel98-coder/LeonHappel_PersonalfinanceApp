@@ -1,0 +1,55 @@
+.seite {
+  max-width: 390px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top) + 48px) 24px calc(env(safe-area-inset-bottom) + 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-name {
+  margin: 0;
+  font-family: var(--schrift-serif);
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.titel {
+  font-size: 40px;
+}
+
+.einleitung {
+  margin: 0;
+  color: var(--text-gedaempft);
+}
+
+.karte {
+  background: var(--flaeche);
+  border: 1px solid var(--rand);
+  border-radius: var(--radius-karte);
+  padding: 20px;
+}
+
+.label {
+  margin: 0 0 8px;
+  font-family: var(--schrift-mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-gedaempft);
+}
+
+.karte p:last-child {
+  margin-bottom: 0;
+}
+
+.gut {
+  color: var(--gut);
+}

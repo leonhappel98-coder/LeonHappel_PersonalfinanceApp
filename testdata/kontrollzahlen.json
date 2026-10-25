@@ -1,0 +1,30 @@
+{
+ "buchungen_gesamt": 1284,
+ "buchungen_giro": 1265,
+ "umbuchungen": 38,
+ "gehalt_monat": 3020.0,
+ "strom": 70.0,
+ "fixkosten_monat": 1240.0,
+ "lebenshaltung_monat": 1360.0,
+ "einmaleffekte": 1920.0,
+ "sparplan_monat": 420.0,
+ "tagesgeld_ende": 2400.0,
+ "giro_start": 445.6,
+ "giro_ende": 445.6,
+ "kategorien_monat": {
+  "Drogerie / Drogerie": 45.0,
+  "Essen & Trinken / Lebensmittel": 310.0,
+  "Essen & Trinken / Lieferservice": 130.0,
+  "Essen & Trinken / Restaurants": 80.0,
+  "Freizeit / Buecher & Zeitungen": 40.0,
+  "Freizeit / Sonstige Freizeitausgaben": 160.0,
+  "Freizeit / Veranstaltungen": 60.0,
+  "Lifestyle / Bekleidung": 90.0,
+  "Lifestyle / Shopping": 150.0,
+  "Mobilitaet / Bus & Bahn": 90.0,
+  "Mobilitaet / Sharing / Gemietet": 45.0,
+  "Mobilitaet / Taxi": 35.0,
+  "Sonstiges / Bargeld": 60.0,
+  "Sonstiges / Sonstige Ausgaben": 65.0
+ }
+}

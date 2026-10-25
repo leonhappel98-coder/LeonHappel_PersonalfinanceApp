@@ -1,0 +1,69 @@
+/* Schriften kommen aus der App selbst (kein Google Fonts), nur der lateinische Zeichensatz. */
+@import '@fontsource/source-serif-4/latin-600.css';
+@import '@fontsource/ibm-plex-sans/latin-400.css';
+@import '@fontsource/ibm-plex-sans/latin-500.css';
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+
+/* Design-Tokens aus CLAUDE.md – Farben, Schriften und Radien nur hier festlegen. */
+:root {
+  --hintergrund: #1f1e1d;
+  --flaeche: #2b2a27;
+  --flaeche-hervorgehoben: #30302d;
+  --rand: rgba(250, 249, 245, 0.1);
+  --linie: #3d3c38;
+
+  --text: #f5f4ee;
+  --text-zweitrangig: #d6d3ca;
+  --text-gedaempft: #a5a198;
+
+  --akzent: #d97757;
+  --gut: #8fbf8a;
+  --warnung: #f28b82;
+  --warnung-balken: #e5534b;
+  --hinweis: #e3b862;
+
+  --schrift-serif: 'Source Serif 4', Georgia, serif;
+  --schrift-text: 'IBM Plex Sans', system-ui, sans-serif;
+  --schrift-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --radius-karte: 20px;
+  --radius-button: 15px;
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--hintergrund);
+  color: var(--text);
+  font-family: var(--schrift-text);
+  font-size: 17px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--schrift-serif);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+button {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--akzent);
+  outline-offset: 2px;
+}

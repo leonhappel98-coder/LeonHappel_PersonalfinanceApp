@@ -1,0 +1,547 @@
+<title>Kurs Demo</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kurs">
+<meta name="theme-color" content="#1f1e1d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Ein Bildschirm pro Screen, horizontal wischen; Entwurf 390x844 wird auf das Gerät skaliert */
+:root{--bg:#1f1e1d;--fg:#f5f4ee;--accent:#D97757;--s:1;color-scheme:dark}
+html,body{height:100%;background:var(--bg);color:var(--fg);overflow:hidden;overscroll-behavior:none}
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+a{color:var(--accent);text-decoration:none}
+#track{height:100%;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#track::-webkit-scrollbar{display:none}
+.screen{flex:0 0 100%;height:100%;scroll-snap-align:center;scroll-snap-stop:always;position:relative;overflow:hidden;background:var(--bg)}
+.frame{position:absolute;left:50%;top:0;width:390px;height:844px;transform-origin:top center;transform:translateX(-50%) scale(var(--s))}
+input{-webkit-user-select:text;user-select:text}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bar-anim{transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.row-anim{transition:opacity .35s ease,transform .35s ease}
+@media (prefers-reduced-motion:reduce){.bar-anim,.row-anim{transition:none}}
+</style>
+<main id="track"><section class="screen" id="Start" data-name="Start" aria-label="Start"><div class="frame"><div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #1f1e1d; color: #f5f4ee; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+<div style="position: absolute; left: -200px; top: -640px; width: 790px; height: 790px; border-radius: 50%; border: 1.5px solid rgba(217, 119, 87, 0.45); box-shadow: 0 14px 48px rgba(217, 119, 87, 0.22)"></div>
+<div style="position: absolute; left: 24px; right: 24px; top: 58px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center; height: 32px">
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 600; letter-spacing: -0.3px">Kurs</div>
+<div style="padding: 4px 10px; border-radius: 999px; background: rgba(212, 162, 76, 0.16); color: #e3b862; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1px">DEMO</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px">
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 36px; font-weight: 600; line-height: 1.12; letter-spacing: -0.4px">Wohin geht<br>dein Geld?</div>
+<div style="font-size: 15px; line-height: 1.45; color: #a5a198">Zieh deinen Kontoexport rein. Die App sortiert jede Buchung und zeigt dir, was du wirklich zum Leben brauchst.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 18px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<label for="guess" style="font-size: 13.5px; line-height: 1.4; color: #d6d3ca">Erst raten: Was gibst du im Monat zum Leben aus? Ohne Miete und Verträge.</label>
+<div style="display: flex; align-items: center; height: 46px; padding: 0 14px; border-radius: 12px; border: 1px solid #55524c; background: #1a1918">
+<input id="guess" type="text" inputmode="decimal" value="1.000" style="flex: 1 1 auto; min-width: 0; border: 0; outline: none; background: transparent; color: #f5f4ee; font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; font-weight: 600">
+<span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; color: #a5a198">€</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 18px 16px; border-radius: 20px; border: 1.5px dashed rgba(217, 119, 87, 0.55); background: #30302d; text-align: center">
+<div style="width: 50px; height: 50px; border-radius: 16px; background: #3b2c26; display: flex; align-items: center; justify-content: center; color: #D97757"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M12 17v-6"></path><path d="M9.5 13.5L12 11l2.5 2.5"></path></svg></div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 19px; font-weight: 600">Kontoexport reinziehen</div>
+<div style="font-size: 13px; color: #a5a198; line-height: 1.4">CSV aus dem Online-Banking oder Excel aus Finanzguru, am besten 12 Monate</div>
+<a href="#Analyse" data-go="Analyse" style="width: 100%; height: 48px; margin-top: 4px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: #D97757; color: #1f1e1d; font-size: 15px; font-weight: 600">Datei auswählen</a>
+<a href="#Analyse" data-go="Analyse" style="display: flex; align-items: center; height: 36px; font-size: 13.5px; font-weight: 500; color: #D97757">Mit Beispieldaten ausprobieren</a>
+</div>
+<div style="display: flex; gap: 10px; align-items: flex-start; padding: 0 4px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8fbf8a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 1px"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+<div style="font-size: 13px; line-height: 1.45; color: #a5a198"><span style="color: #d6d3ca">Bleibt auf deinem iPhone.</span> Gerechnet wird auf dem Gerät, nichts geht an einen Server.</div>
+</div>
+</div>
+<div style="position: absolute; left: 0; right: 0; bottom: 30px; text-align: center; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px; font-style: italic; color: #a5a198">Mit Claude gebaut</div>
+</div></div></section>
+<section class="screen" id="Analyse" data-name="Analyse" aria-label="Analyse"><div class="frame"><div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #1f1e1d; color: #f5f4ee; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+<div style="position: absolute; left: 24px; right: 24px; top: 58px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center; height: 32px">
+<a href="#Start" data-go="Start" aria-label="Zurück" style="width: 44px; height: 44px; margin-left: -10px; display: flex; align-items: center; justify-content: center; color: #d6d3ca"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg></a>
+<div style="padding: 4px 10px; border-radius: 999px; background: rgba(212, 162, 76, 0.16); color: #e3b862; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1px">DEMO</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 600; letter-spacing: -0.3px">Analyse läuft</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a5a198">kontoexport_alex.csv · Okt 2025 – Okt 2026</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="height: 8px; border-radius: 4px; background: #3d3c38"><div style="width: 86%; height: 8px; border-radius: 4px; background: #D97757"></div></div>
+<div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #a5a198"><span>Schritt 6 von 6</span><span>läuft auf deinem iPhone, offline</span></div>
+</div>
+<div style="display: flex; flex-direction: column; padding: 4px 16px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 0">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8fbf8a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 14.5px; font-weight: 500">Buchungen gelesen</div><div style="font-size: 12.5px; color: #a5a198">1.284 Buchungen aus 12 Monaten</div></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid #3d3c38">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8fbf8a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 14.5px; font-weight: 500">Umbuchungen rausgerechnet</div><div style="font-size: 12.5px; color: #a5a198">38 zwischen deinen eigenen Konten</div></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid #3d3c38">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8fbf8a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 14.5px; font-weight: 500">Kategorien zugeordnet</div><div style="font-size: 12.5px; color: #a5a198">1.231 automatisch, 53 zum Nachschauen</div></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid #3d3c38">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8fbf8a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 14.5px; font-weight: 500">Einmaleffekte erkannt</div><div style="font-size: 12.5px; color: #a5a198">Urlaub 1.400 €, Waschmaschine 520 €</div></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid #3d3c38">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8fbf8a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 14.5px; font-weight: 500">Lebenshaltung berechnet</div><div style="font-size: 12.5px; color: #a5a198">Durchschnitt ohne Miete, Verträge und Einmaleffekte</div></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid #3d3c38">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 1px"><circle cx="12" cy="12" r="9" stroke="#3d3c38"></circle><path d="M12 3a9 9 0 0 1 9 9" stroke="#D97757"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 14.5px; font-weight: 500; color: #D97757">Fixkosten prüfen …</div><div style="font-size: 12.5px; color: #a5a198">Verträge, Abos, doppelte Zahlungen</div></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 18px; border: 1.5px solid rgba(217, 119, 87, 0.55); background: #30302d">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1.2px; color: #a5a198">ERSTER BEFUND</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 19px; font-weight: 600; line-height: 1.3">Du brauchst 1.360 € im Monat zum Leben.</div>
+<div style="font-size: 13px; color: #e3b862">Geschätzt hattest du 1.000 €.</div>
+</div>
+</div>
+<a href="#Ergebnis" data-go="Ergebnis" style="position: absolute; left: 24px; right: 24px; bottom: 40px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 16px; background: #D97757; color: #1f1e1d; font-size: 16px; font-weight: 600">Ergebnis ansehen</a>
+</div></div></section>
+<section class="screen" id="Ergebnis" data-name="Ergebnis" aria-label="Ergebnis"><div class="frame"><div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #1f1e1d; color: #f5f4ee; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+<div style="position: absolute; left: 20px; right: 20px; top: 58px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1.2px; color: #a5a198">AUSWERTUNG · LETZTE 12 MONATE</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 30px; font-weight: 600; letter-spacing: -0.3px">So lebst du wirklich</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 22px; border: 1px solid rgba(250, 249, 245, 0.10); background: #30302d">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1.2px; color: #a5a198">LEBENSHALTUNG PRO MONAT</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 40px; font-weight: 600; line-height: 1; white-space: nowrap">1.360 €</div>
+<div style="font-size: 13px; color: #e3b862">360 € mehr als geschätzt</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #a5a198"><span>Geschätzt</span><span style="font-family: 'IBM Plex Mono', monospace">1.000 €</span></div>
+<div style="height: 8px; border-radius: 4px; background: #3d3c38"><div style="width: 74%; height: 8px; border-radius: 4px; background: #6b6862"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #d6d3ca"><span>Tatsächlich</span><span style="font-family: 'IBM Plex Mono', monospace">1.360 €</span></div>
+<div style="height: 8px; border-radius: 4px; background: #3d3c38"><div style="width: 100%; height: 8px; border-radius: 4px; background: #D97757"></div></div>
+</div>
+<div style="font-size: 12.5px; color: #a5a198">Aufs Jahr sind das 4.320 € mehr als gedacht.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1.2px; color: #a5a198">WOHIN ES GEHT</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Essen &amp; Trinken</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">520 €</span></div>
+<div style="height: 6px; border-radius: 3px; background: #3d3c38"><div style="width: 100%; height: 6px; border-radius: 3px; background: #D97757"></div></div>
+<div style="font-size: 12px; color: #a5a198">davon Lieferdienste und Restaurants 210 €</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Freizeit</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">260 €</span></div>
+<div style="height: 6px; border-radius: 3px; background: #3d3c38"><div style="width: 50%; height: 6px; border-radius: 3px; background: #D97757"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Shopping</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">240 €</span></div>
+<div style="height: 6px; border-radius: 3px; background: #3d3c38"><div style="width: 46%; height: 6px; border-radius: 3px; background: #D97757"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Mobilität</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">170 €</span></div>
+<div style="height: 6px; border-radius: 3px; background: #3d3c38"><div style="width: 33%; height: 6px; border-radius: 3px; background: #D97757"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Sonstiges</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">170 €</span></div>
+<div style="height: 6px; border-radius: 3px; background: #3d3c38"><div style="width: 33%; height: 6px; border-radius: 3px; background: #D97757"></div></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 18px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600">Fixkosten 1.240 €</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a5a198">41 % vom Netto</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="padding: 3px 10px; border-radius: 999px; background: rgba(229, 83, 75, 0.16); color: #f28b82; font-size: 12px">Handy 39,99 €: Tarif prüfen</span>
+<span style="padding: 3px 10px; border-radius: 999px; background: rgba(229, 83, 75, 0.16); color: #f28b82; font-size: 12px">2 Streaming-Abos: doppelt?</span>
+</div>
+</div>
+</div>
+<a href="#Main" data-go="Main" style="position: absolute; left: 20px; right: 20px; bottom: 40px; height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 16px; background: #D97757; color: #1f1e1d; font-size: 16px; font-weight: 600">Weiter: Ziel festlegen</a>
+</div></div></section>
+<section class="screen" id="Main" data-name="Main" aria-label="Main"><div class="frame"><div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #1f1e1d; color: #f5f4ee; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+<div style="position: absolute; left: -260px; top: -760px; width: 910px; height: 910px; border-radius: 50%; border: 1.5px solid rgba(217, 119, 87, 0.55); box-shadow: 0 12px 40px rgba(217, 119, 87, 0.22)"></div>
+<div style="position: absolute; left: 20px; right: 20px; top: 58px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: 14px; color: #a5a198">Guten Abend, Alex</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 600">Heute</div>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<div style="padding: 4px 10px; border-radius: 999px; background: rgba(212, 162, 76, 0.16); color: #e3b862; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1px">DEMO</div>
+<button aria-label="Einstellungen" style="width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27; display: flex; align-items: center; justify-content: center; padding: 0">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d6d3ca" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path></svg>
+</button>
+</div>
+</div>
+<div style="display: flex; gap: 16px; align-items: center; padding: 18px; border-radius: 22px; border: 1px solid rgba(250, 249, 245, 0.10); background: #30302d">
+<svg width="124" height="124" viewBox="0 0 124 124" role="img" aria-label="34 Prozent des Ziels erreicht">
+<circle cx="62" cy="62" r="52" fill="none" stroke="#3d3c38" stroke-width="10"></circle>
+<circle cx="62" cy="62" r="52" fill="none" stroke="#D97757" stroke-width="10" stroke-linecap="round" stroke-dasharray="111 327" transform="rotate(-90 62 62)"></circle>
+<text x="62" y="60" text-anchor="middle" font-family="'Source Serif 4', Georgia, serif" font-size="26" font-weight="600" fill="#f5f4ee">34 %</text>
+<text x="62" y="80" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#a5a198">von 100k</text>
+</svg>
+<div style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1.4px; color: #a5a198">NETTOVERMÖGEN</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; font-weight: 600">34.200 €</div>
+<div style="font-size: 13px; color: #a5a198; line-height: 1.4">Ziel 100k bis Juli 2030</div>
+<div style="display: flex; flex-direction: column; gap: 3px; font-size: 13px">
+<div style="color: #f28b82">Prognose: Okt 2030</div>
+<div style="color: #8fbf8a">Mit allen Schritten: Feb 2030</div>
+</div>
+</div>
+</div>
+<a href="#Schritte" data-go="Schritte" style="display: flex; flex-direction: column; gap: 8px; padding: 16px 18px; border-radius: 20px; border: 1.5px solid rgba(217, 119, 87, 0.6); background: #2b2a27; color: #f5f4ee; box-shadow: 0 0 28px -12px rgba(217, 119, 87, 0.8)">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<div style="padding: 3px 9px; border-radius: 999px; background: #D97757; color: #1f1e1d; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1.2px">NÄCHSTER SCHRITT</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a5a198">laufend</div>
+</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 500">Essen auf 450 € deckeln</div>
+<div style="display: flex; gap: 12px; font-size: 13px; color: #a5a198"><span style="font-family: 'IBM Plex Mono', monospace; color: #8fbf8a">+180 €/Monat</span><span>Ziel 4 Monate früher</span></div>
+</a>
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 16px 18px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 500">Oktober</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a5a198">Tag 23 von 31</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; font-size: 13px"><span>Essen &amp; Trinken</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">312 / 450 €</span></div>
+<div style="position: relative; height: 8px; border-radius: 4px; background: #3d3c38"><div style="width: 69%; height: 8px; border-radius: 4px; background: #8fbf8a"></div><div style="position: absolute; left: 74%; top: -3px; width: 2px; height: 14px; background: #f5f4ee; opacity: 0.6"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; font-size: 13px"><span>Mobilität</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">96 / 180 €</span></div>
+<div style="position: relative; height: 8px; border-radius: 4px; background: #3d3c38"><div style="width: 53%; height: 8px; border-radius: 4px; background: #8fbf8a"></div><div style="position: absolute; left: 74%; top: -3px; width: 2px; height: 14px; background: #f5f4ee; opacity: 0.6"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; font-size: 13px"><span>Shopping</span><span style="font-family: 'IBM Plex Mono', monospace; color: #f28b82">210 / 150 €</span></div>
+<div style="position: relative; height: 8px; border-radius: 4px; background: #3d3c38"><div style="width: 100%; height: 8px; border-radius: 4px; background: #e5534b"></div><div style="position: absolute; left: 74%; top: -3px; width: 2px; height: 14px; background: #f5f4ee; opacity: 0.6"></div></div>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border-radius: 16px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px; color: #a5a198">NOTGROSCHEN</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: #f28b82">0,8 Mon.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border-radius: 16px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px; color: #a5a198">SPARQUOTE</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: #8fbf8a">14 %</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border-radius: 16px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px; color: #a5a198">FIXKOSTEN</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: #e3b862">41 %</div>
+</div>
+</div>
+</div>
+<nav aria-label="Hauptnavigation" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; box-sizing: border-box; padding: 8px 6px 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: rgba(31, 30, 29, 0.97); border-top: 1px solid #3d3c38">
+<a href="#Main" data-go="Main" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #D97757; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Heute</a>
+<a href="#Schritte" data-go="Schritte" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11"></path><path d="M9 12h11"></path><path d="M9 18h11"></path><path d="M3.5 6l1.5 1.5L7.5 5"></path><path d="M3.5 12l1.5 1.5 2.5-2.5"></path><circle cx="5" cy="18" r="1.5"></circle></svg>Schritte</a>
+<a href="#Prognose" data-go="Prognose" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"></path><path d="M4 16l5-5 4 3 7-8"></path><path d="M16 6h4v4"></path></svg>Prognose</a>
+<a href="#Budgets" data-go="Budgets" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"></rect><path d="M3 10h18"></path><path d="M16 15h2"></path></svg>Budgets</a>
+<a href="#Daten" data-go="Daten" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"></path><path d="M8 8l4-4 4 4"></path><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"></path></svg>Daten</a>
+</nav>
+</div></div></section>
+<section class="screen" id="Schritte" data-name="Schritte" aria-label="Schritte"><div class="frame"><div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #1f1e1d; color: #f5f4ee; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+<div style="position: absolute; left: 20px; right: 20px; top: 58px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: 14px; color: #a5a198">2 von 7 erledigt</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 600">Nächste Schritte</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #30302d">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px; color: #a5a198">SO WIE JETZT</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; font-weight: 600; color: #f28b82">Okt 2030</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px; color: #a5a198">MIT ALLEN SCHRITTEN</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; font-weight: 600; color: #8fbf8a">Feb 2030</div>
+</div>
+</div>
+<div style="height: 6px; border-radius: 3px; background: #3d3c38"><div style="width: 29%; height: 6px; border-radius: 3px; background: #8fbf8a"></div></div>
+<div style="font-size: 12.5px; color: #a5a198">Offene Schritte zusammen: +364 € im Monat</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 18px; border: 1.5px solid rgba(212, 162, 76, 0.65); background: #2b2a27">
+<div style="display: flex; gap: 6px; align-items: center">
+<div style="padding: 2px 8px; border-radius: 999px; background: rgba(212, 162, 76, 0.16); color: #e3b862; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px">ABSICHERUNG</div>
+<div style="padding: 2px 8px; border-radius: 999px; background: #d4a24c; color: #1f1e1d; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px">DIESE WOCHE</div>
+<div style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a5a198">laufend</div>
+</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 500">Notgroschen auf 9.000 € aufbauen</div>
+<div style="font-size: 13px; color: #a5a198; line-height: 1.4">Flüssig sind 2.400 €, das reicht für 24 Tage. Erst 500 €, dann 1.000 €, dann drei Monate.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 18px; border: 1.5px solid rgba(138, 180, 217, 0.55); background: #2b2a27">
+<div style="display: flex; gap: 6px; align-items: center">
+<div style="padding: 2px 8px; border-radius: 999px; background: rgba(138, 180, 217, 0.16); color: #a9c8e6; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px">AUSGABEN</div>
+<div style="padding: 2px 8px; border-radius: 999px; background: #8ab4d9; color: #1f1e1d; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px">DIESE WOCHE</div>
+<div style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a5a198">laufend</div>
+</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 500">Essen auf 450 € deckeln</div>
+<div style="display: flex; gap: 12px; font-size: 13px; color: #a5a198"><span style="font-family: 'IBM Plex Mono', monospace; color: #a9c8e6">+180 €/Monat</span><span>Ziel 4 Monate früher</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 18px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="display: flex; gap: 6px; align-items: center">
+<div style="padding: 2px 8px; border-radius: 999px; background: rgba(143, 191, 138, 0.16); color: #8fbf8a; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px">EINKOMMEN</div>
+<div style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a5a198">Gespräch</div>
+</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 500">Gehaltserhöhung ansprechen</div>
+<div style="display: flex; gap: 12px; font-size: 13px; color: #a5a198"><span style="font-family: 'IBM Plex Mono', monospace; color: #8fbf8a">+146 €/Monat</span><span>bei +3.000 € brutto</span></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 18px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="display: flex; gap: 6px; align-items: center">
+<div style="padding: 2px 8px; border-radius: 999px; background: rgba(138, 180, 217, 0.16); color: #a9c8e6; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px">AUSGABEN</div>
+<div style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a5a198">30 Min</div>
+</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 500">Handytarif wechseln</div>
+<div style="display: flex; gap: 12px; font-size: 13px; color: #a5a198"><span style="font-family: 'IBM Plex Mono', monospace; color: #a9c8e6">+25 €/Monat</span><span>Ziel 1 Monat früher</span></div>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 18px; border: 1px solid rgba(143, 191, 138, 0.45); background: #262624; opacity: 0.6">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8fbf8a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg>
+<div style="font-size: 14px; text-decoration: line-through">Kostenloses Girokonto</div>
+<div style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8fbf8a">+9 €/Monat</div>
+</div>
+</div>
+<nav aria-label="Hauptnavigation" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; box-sizing: border-box; padding: 8px 6px 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: rgba(31, 30, 29, 0.97); border-top: 1px solid #3d3c38">
+<a href="#Main" data-go="Main" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Heute</a>
+<a href="#Schritte" data-go="Schritte" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #D97757; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11"></path><path d="M9 12h11"></path><path d="M9 18h11"></path><path d="M3.5 6l1.5 1.5L7.5 5"></path><path d="M3.5 12l1.5 1.5 2.5-2.5"></path><circle cx="5" cy="18" r="1.5"></circle></svg>Schritte</a>
+<a href="#Prognose" data-go="Prognose" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"></path><path d="M4 16l5-5 4 3 7-8"></path><path d="M16 6h4v4"></path></svg>Prognose</a>
+<a href="#Budgets" data-go="Budgets" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"></rect><path d="M3 10h18"></path><path d="M16 15h2"></path></svg>Budgets</a>
+<a href="#Daten" data-go="Daten" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"></path><path d="M8 8l4-4 4 4"></path><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"></path></svg>Daten</a>
+</nav>
+</div></div></section>
+<section class="screen" id="Prognose" data-name="Prognose" aria-label="Prognose"><div class="frame"><div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #1f1e1d; color: #f5f4ee; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+<div style="position: absolute; left: 20px; right: 20px; top: 58px; display: flex; flex-direction: column; gap: 14px">
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 600">Prognose</div>
+<div role="group" aria-label="Szenario" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 14px; border: 1px solid #3d3c38; background: #2b2a27">
+<button style="height: 36px; border: 0; border-radius: 10px; background: transparent; color: #a5a198; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 500">Vorsichtig</button>
+<button aria-pressed="true" style="height: 36px; border: 1px solid #D97757; border-radius: 10px; background: #3b2c26; color: #D97757; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 600">Realistisch</button>
+<button style="height: 36px; border: 0; border-radius: 10px; background: transparent; color: #a5a198; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 500">Optimistisch</button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1.4px; color: #a5a198">100K ERREICHT</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 600">Okt 2030</div>
+<div style="font-size: 13px; color: #f28b82">3 Monate nach dem Ziel Juli 2030</div>
+</div>
+<div style="padding: 12px 8px 8px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<svg width="334" height="210" viewBox="0 0 350 210" role="img" aria-label="Vermögen bis 2032 in drei Szenarien, realistisch 100k im Oktober 2030">
+<g font-family="IBM Plex Mono, monospace" font-size="10" fill="#a5a198">
+<line x1="36" x2="340" y1="190" y2="190" stroke="#3d3c38"></line>
+<line x1="36" x2="340" y1="147.5" y2="147.5" stroke="#3d3c38"></line>
+<line x1="36" x2="340" y1="62.5" y2="62.5" stroke="#3d3c38"></line>
+<line x1="36" x2="340" y1="20" y2="20" stroke="#3d3c38"></line>
+<text x="30" y="193" text-anchor="end">0</text>
+<text x="30" y="150.5" text-anchor="end">50k</text>
+<text x="30" y="108" text-anchor="end">100k</text>
+<text x="30" y="65.5" text-anchor="end">150k</text>
+<text x="30" y="23" text-anchor="end">200k</text>
+<text x="49" y="205" text-anchor="middle">27</text>
+<text x="101" y="205" text-anchor="middle">28</text>
+<text x="153" y="205" text-anchor="middle">29</text>
+<text x="206" y="205" text-anchor="middle">30</text>
+<text x="258" y="205" text-anchor="middle">31</text>
+<text x="310" y="205" text-anchor="middle">32</text>
+</g>
+<line x1="36" x2="340" y1="105" y2="105" stroke="#8fbf8a" stroke-width="1.4" stroke-dasharray="5 5"></line>
+<path d="M36 161 C 100 140, 170 105, 200 92 S 300 50, 336 33" fill="none" stroke="#a5a198" stroke-width="1.4" stroke-dasharray="5 4"></path>
+<path d="M36 161 C 130 150, 250 118, 336 90" fill="none" stroke="#a5a198" stroke-width="1.4" stroke-dasharray="5 4"></path>
+<path d="M36 161 C 110 145, 190 120, 245 105 S 315 75, 336 62 L 336 190 L 36 190 Z" fill="rgba(217, 119, 87, 0.14)"></path>
+<path d="M36 161 C 110 145, 190 120, 245 105 S 315 75, 336 62" fill="none" stroke="#D97757" stroke-width="2.6"></path>
+<rect x="30" y="155" width="12" height="12" transform="rotate(45 36 161)" fill="#f5f4ee" stroke="#1f1e1d" stroke-width="2"></rect>
+<circle cx="245" cy="105" r="6" fill="#1f1e1d" stroke="#8fbf8a" stroke-width="2.4"></circle>
+<text x="240" y="96" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#8fbf8a">Okt 30</text>
+<text x="48" y="178" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#f5f4ee">heute 34,2k</text>
+</svg>
+<div style="display: flex; gap: 14px; flex-wrap: wrap; padding: 4px 8px 2px; font-size: 12px; color: #a5a198">
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 3px; border-radius: 2px; background: #D97757"></span>realistisch</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 0; border-top: 1.5px dashed #a5a198"></span>vorsichtig, optimistisch</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 9px; height: 9px; transform: rotate(45deg); background: #f5f4ee"></span>Ist</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 16px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px; color: #a5a198">INS DEPOT</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600">460 €/Mon.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 16px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 1px; color: #a5a198">ANNAHMEN</div>
+<div style="font-size: 13px; line-height: 1.35">5 % Rendite, Gehalt +3 % im Jahr</div>
+</div>
+</div>
+<button style="height: 50px; border-radius: 14px; border: 1.5px solid #D97757; background: #D97757; color: #1f1e1d; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; font-weight: 600; box-shadow: 0 0 24px -8px #D97757">Was wäre, wenn …?</button>
+</div>
+<nav aria-label="Hauptnavigation" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; box-sizing: border-box; padding: 8px 6px 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: rgba(31, 30, 29, 0.97); border-top: 1px solid #3d3c38">
+<a href="#Main" data-go="Main" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Heute</a>
+<a href="#Schritte" data-go="Schritte" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11"></path><path d="M9 12h11"></path><path d="M9 18h11"></path><path d="M3.5 6l1.5 1.5L7.5 5"></path><path d="M3.5 12l1.5 1.5 2.5-2.5"></path><circle cx="5" cy="18" r="1.5"></circle></svg>Schritte</a>
+<a href="#Prognose" data-go="Prognose" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #D97757; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"></path><path d="M4 16l5-5 4 3 7-8"></path><path d="M16 6h4v4"></path></svg>Prognose</a>
+<a href="#Budgets" data-go="Budgets" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"></rect><path d="M3 10h18"></path><path d="M16 15h2"></path></svg>Budgets</a>
+<a href="#Daten" data-go="Daten" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"></path><path d="M8 8l4-4 4 4"></path><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"></path></svg>Daten</a>
+</nav>
+</div></div></section>
+<section class="screen" id="Budgets" data-name="Budgets" aria-label="Budgets"><div class="frame"><div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #1f1e1d; color: #f5f4ee; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+<div style="position: absolute; left: 20px; right: 20px; top: 58px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: 14px; color: #a5a198">Tag 23 von 31</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 600">Oktober</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #30302d">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 600">916 €</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a5a198">von 1.200 € frei</div>
+</div>
+<div style="position: relative; height: 10px; border-radius: 5px; background: #3d3c38"><div style="width: 76%; height: 10px; border-radius: 5px; background: #8fbf8a"></div><div style="position: absolute; left: 74%; top: -3px; width: 2px; height: 16px; background: #f5f4ee; opacity: 0.7"></div></div>
+<div style="font-size: 12.5px; color: #a5a198">Fast im Plan. Shopping ist drüber, Essen hat noch 138 € Luft.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 16px 18px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Wohnen <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a5a198">FIX</span></span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">980 / 980 €</span></div>
+<div style="height: 7px; border-radius: 4px; background: #3d3c38"><div style="width: 100%; height: 7px; border-radius: 4px; background: #6b6862"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Verträge &amp; Abos <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a5a198">FIX</span></span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">260 / 260 €</span></div>
+<div style="height: 7px; border-radius: 4px; background: #3d3c38"><div style="width: 100%; height: 7px; border-radius: 4px; background: #6b6862"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Essen &amp; Trinken</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">312 / 450 €</span></div>
+<div style="position: relative; height: 7px; border-radius: 4px; background: #3d3c38"><div style="width: 69%; height: 7px; border-radius: 4px; background: #8fbf8a"></div><div style="position: absolute; left: 74%; top: -3px; width: 2px; height: 13px; background: #f5f4ee; opacity: 0.6"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Mobilität</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">96 / 180 €</span></div>
+<div style="position: relative; height: 7px; border-radius: 4px; background: #3d3c38"><div style="width: 53%; height: 7px; border-radius: 4px; background: #8fbf8a"></div><div style="position: absolute; left: 74%; top: -3px; width: 2px; height: 13px; background: #f5f4ee; opacity: 0.6"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Freizeit</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">240 / 300 €</span></div>
+<div style="position: relative; height: 7px; border-radius: 4px; background: #3d3c38"><div style="width: 80%; height: 7px; border-radius: 4px; background: #e3b862"></div><div style="position: absolute; left: 74%; top: -3px; width: 2px; height: 13px; background: #f5f4ee; opacity: 0.6"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Shopping</span><span style="font-family: 'IBM Plex Mono', monospace; color: #f28b82">210 / 150 €</span></div>
+<div style="position: relative; height: 7px; border-radius: 4px; background: #3d3c38"><div style="width: 100%; height: 7px; border-radius: 4px; background: #e5534b"></div><div style="position: absolute; left: 74%; top: -3px; width: 2px; height: 13px; background: #f5f4ee; opacity: 0.6"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 5px">
+<div style="display: flex; justify-content: space-between; font-size: 13.5px"><span>Sonstiges</span><span style="font-family: 'IBM Plex Mono', monospace; color: #d6d3ca">58 / 120 €</span></div>
+<div style="position: relative; height: 7px; border-radius: 4px; background: #3d3c38"><div style="width: 48%; height: 7px; border-radius: 4px; background: #8fbf8a"></div><div style="position: absolute; left: 74%; top: -3px; width: 2px; height: 13px; background: #f5f4ee; opacity: 0.6"></div></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 0; padding: 6px 18px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="padding: 10px 0 6px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1.2px; color: #a5a198">VERTRÄGE MIT HINWEIS</div>
+<div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px dashed #3d3c38">
+<div style="flex: 1 1 auto; font-size: 14px">Handyvertrag</div>
+<div style="padding: 2px 8px; border-radius: 999px; background: rgba(229, 83, 75, 0.16); color: #f28b82; font-family: 'IBM Plex Mono', monospace; font-size: 11px">Tarif prüfen</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #d6d3ca">39,99 €</div>
+</div>
+<div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px dashed #3d3c38">
+<div style="flex: 1 1 auto; font-size: 14px">2 Streaming-Abos</div>
+<div style="padding: 2px 8px; border-radius: 999px; background: rgba(229, 83, 75, 0.16); color: #f28b82; font-family: 'IBM Plex Mono', monospace; font-size: 11px">doppelt?</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #d6d3ca">26,98 €</div>
+</div>
+</div>
+</div>
+<nav aria-label="Hauptnavigation" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; box-sizing: border-box; padding: 8px 6px 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: rgba(31, 30, 29, 0.97); border-top: 1px solid #3d3c38">
+<a href="#Main" data-go="Main" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Heute</a>
+<a href="#Schritte" data-go="Schritte" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11"></path><path d="M9 12h11"></path><path d="M9 18h11"></path><path d="M3.5 6l1.5 1.5L7.5 5"></path><path d="M3.5 12l1.5 1.5 2.5-2.5"></path><circle cx="5" cy="18" r="1.5"></circle></svg>Schritte</a>
+<a href="#Prognose" data-go="Prognose" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"></path><path d="M4 16l5-5 4 3 7-8"></path><path d="M16 6h4v4"></path></svg>Prognose</a>
+<a href="#Budgets" data-go="Budgets" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #D97757; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"></rect><path d="M3 10h18"></path><path d="M16 15h2"></path></svg>Budgets</a>
+<a href="#Daten" data-go="Daten" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"></path><path d="M8 8l4-4 4 4"></path><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"></path></svg>Daten</a>
+</nav>
+</div></div></section>
+<section class="screen" id="Daten" data-name="Daten" aria-label="Daten"><div class="frame"><div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #1f1e1d; color: #f5f4ee; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+<div style="position: absolute; left: 20px; right: 20px; top: 58px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<div style="font-size: 14px; color: #a5a198">Letzter Import 23.10. · 1.284 Buchungen</div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; font-weight: 600">Neue Daten</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 22px 18px 18px; border-radius: 20px; border: 1.5px dashed rgba(217, 119, 87, 0.45); background: #30302d; text-align: center">
+<div style="width: 52px; height: 52px; border-radius: 16px; background: #3b2c26; border: 1px solid #3d3c38; display: flex; align-items: center; justify-content: center; color: #D97757"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M12 17v-6"></path><path d="M9.5 13.5L12 11l2.5 2.5"></path></svg></div>
+<div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 500">Kontoexport auswählen</div>
+<div style="font-size: 13px; color: #a5a198; line-height: 1.4">CSV aus dem Online-Banking oder Excel aus Finanzguru</div>
+<a href="#Analyse" data-go="Analyse" style="width: 100%; height: 48px; margin-top: 4px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-radius: 14px; border: 1.5px solid #D97757; background: #D97757; color: #1f1e1d; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; font-weight: 600; box-shadow: 0 0 24px -8px #D97757">Datei auswählen</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="padding: 4px 10px; border-radius: 999px; border: 1px solid #3d3c38; background: #2b2a27; font-size: 12px; color: #d6d3ca">Sparkasse</span>
+<span style="padding: 4px 10px; border-radius: 999px; border: 1px solid #3d3c38; background: #2b2a27; font-size: 12px; color: #d6d3ca">ING</span>
+<span style="padding: 4px 10px; border-radius: 999px; border: 1px solid #3d3c38; background: #2b2a27; font-size: 12px; color: #d6d3ca">DKB</span>
+<span style="padding: 4px 10px; border-radius: 999px; border: 1px solid #3d3c38; background: #2b2a27; font-size: 12px; color: #d6d3ca">comdirect</span>
+<span style="padding: 4px 10px; border-radius: 999px; border: 1px solid #3d3c38; background: #2b2a27; font-size: 12px; color: #d6d3ca">Volksbank</span>
+<span style="padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(143, 191, 138, 0.45); background: rgba(143, 191, 138, 0.1); font-size: 12px; color: #8fbf8a">Finanzguru</span>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 18px; border: 1px solid rgba(143, 191, 138, 0.35); background: #2b2a27">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8fbf8a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 auto; margin-top: 1px"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 3px">
+<div style="font-size: 14px; font-weight: 600">Bleibt auf deinem iPhone</div>
+<div style="font-size: 13px; color: #a5a198; line-height: 1.4">Die App rechnet lokal, nichts geht an einen Server.</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 20px; border: 1px solid rgba(250, 249, 245, 0.10); background: #2b2a27">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1.2px; color: #a5a198">MONATS-CHECK-IN</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e3b862">fällig</div>
+</div>
+<label for="depot" style="font-size: 13.5px; color: #d6d3ca">Depotwert heute</label>
+<div style="display: flex; align-items: center; height: 48px; padding: 0 14px; border-radius: 14px; border: 1px solid #55524c; background: #1a1918">
+<input id="depot" type="text" inputmode="decimal" value="31.800" style="flex: 1 1 auto; min-width: 0; border: 0; outline: none; background: transparent; color: #f5f4ee; font-family: 'IBM Plex Mono', monospace; font-size: 17px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #a5a198">€</span>
+</div>
+<div style="font-size: 12.5px; color: #a5a198">Letzter Stand 30.09.: 30.950 €</div>
+<button style="height: 46px; border-radius: 14px; border: 1.5px solid #D97757; background: transparent; color: #D97757; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; font-weight: 600">Check-in speichern</button>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 0 4px; font-size: 13px; color: #a5a198">
+<span>Backup-Datei exportieren</span>
+<span style="font-family: 'IBM Plex Mono', monospace; color: #D97757">.json</span>
+</div>
+</div>
+<nav aria-label="Hauptnavigation" style="position: absolute; left: 0; right: 0; bottom: 0; height: 84px; box-sizing: border-box; padding: 8px 6px 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); background: rgba(31, 30, 29, 0.97); border-top: 1px solid #3d3c38">
+<a href="#Main" data-go="Main" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg>Heute</a>
+<a href="#Schritte" data-go="Schritte" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11"></path><path d="M9 12h11"></path><path d="M9 18h11"></path><path d="M3.5 6l1.5 1.5L7.5 5"></path><path d="M3.5 12l1.5 1.5 2.5-2.5"></path><circle cx="5" cy="18" r="1.5"></circle></svg>Schritte</a>
+<a href="#Prognose" data-go="Prognose" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"></path><path d="M4 16l5-5 4 3 7-8"></path><path d="M16 6h4v4"></path></svg>Prognose</a>
+<a href="#Budgets" data-go="Budgets" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #a5a198; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"></rect><path d="M3 10h18"></path><path d="M16 15h2"></path></svg>Budgets</a>
+<a href="#Daten" data-go="Daten" style="display: flex; flex-direction: column; align-items: center; gap: 4px; height: 48px; justify-content: center; color: #D97757; font-size: 11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V4"></path><path d="M8 8l4-4 4 4"></path><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"></path></svg>Daten</a>
+</nav>
+</div></div></section></main>
+<script>
+(function(){
+  var track=document.getElementById('track');
+  var screens=[].slice.call(document.querySelectorAll('.screen'));
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fit(){
+    var w=track.clientWidth,h=track.clientHeight;
+    var s=Math.min(w/390,h/844);
+    document.documentElement.style.setProperty('--s',s.toFixed(4));
+  }
+  fit(); window.addEventListener('resize',fit);
+  function go(name,smooth){
+    var i=screens.findIndex(function(s){return s.id===name});
+    if(i<0)return;
+    track.scrollTo({left:i*track.clientWidth,behavior:smooth&&!reduce?'smooth':'auto'});
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('[data-go]'); if(!a)return;
+    e.preventDefault(); go(a.getAttribute('data-go'),true);
+  });
+  function bars(sc){return [].slice.call(sc.querySelectorAll('div[style*="width:"]')).filter(function(el){
+    return /%$/.test(el.style.width)&&parseFloat(el.style.height)<=10;})}
+  screens.forEach(function(sc){bars(sc).forEach(function(b){b.dataset.w=b.style.width;b.classList.add('bar-anim')})});
+  var current=null;
+  function play(sc){
+    if(reduce||sc===current)return; current=sc;
+    var bs=bars(sc);
+    bs.forEach(function(b){b.style.transition='none';b.style.width='0%'});
+    var rows=sc.id==='Analyse'?[].slice.call(sc.querySelectorAll('div[style*="padding: 12px 0"]')):[];
+    var cards=sc.id==='Analyse'?[].slice.call(sc.querySelectorAll('div[style*="ERSTER"],div[style*="border: 1.5px solid rgba(217, 119, 87, 0.55)"]')):[];
+    rows.concat(cards).forEach(function(r){r.classList.add('row-anim');r.style.transition='none';r.style.opacity='0';r.style.transform='translateY(6px)'});
+    void sc.offsetWidth;
+    requestAnimationFrame(function(){
+      bs.forEach(function(b,i){b.style.transition='';setTimeout(function(){b.style.width=b.dataset.w},120+i*60)});
+      rows.concat(cards).forEach(function(r,i){r.style.transition='';setTimeout(function(){r.style.opacity='1';r.style.transform='none'},250+i*380)});
+    });
+  }
+  var t=null;
+  track.addEventListener('scroll',function(){
+    clearTimeout(t); t=setTimeout(function(){
+      var i=Math.round(track.scrollLeft/track.clientWidth); if(screens[i])play(screens[i]);
+    },90);
+  },{passive:true});
+  var start=(location.hash||'').slice(1);
+  if(start&&document.getElementById(start)){go(start,false);setTimeout(function(){play(document.getElementById(start))},50)}
+  else{ current=screens[0]; }
+})();
+</script>
