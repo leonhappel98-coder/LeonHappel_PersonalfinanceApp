@@ -147,3 +147,14 @@ Grenzen in `config.ts` (`AMPEL`). Vergleichswerte mit Quelle in `src/engine/verg
 - Nettovermögen nach Alter (Median je Haushalt, inkl. Immobilien), Bundesbank-Vermögensbefragung 2023: 16–24: 13.000 €, 25–34: 19.100 €, 35–44: 75.100 €, 45–54: 156.200 €, 55–64: 255.900 €, 65–74: 211.900 €, ab 75: 149.400 €. Alter = aktuelles Jahr − Geburtsjahr (Eingabe in „Dein Ziel“, freiwillig).
 
 Abnahme mit Alex (Geburtsjahr 1997): Notgroschen 0,9 Monate (rot), Sparquote 14 % (grün), Fixkosten 41 % (gelb), Altersgruppe 25–34 mit Median 19.100 €, Alex 34.200 €.
+
+## 13. Was wäre, wenn …? (Phase 5)
+
+Vier Regler, Startwerte aus Auswertung und Ziel: Netto-Gehalt (Nettoeinkommen pro Monat), Ausgaben (Lebenshaltung + Fixkosten pro Monat), Sparrate (inkl. erledigter Schritte), Rendite 5 %.
+
+- Gekoppelt (Entscheidung Leon): Gehalt +X € → Sparrate +X €; Ausgaben −X € → Sparrate +X €. Die Sparrate fällt nie unter 0 und kann danach frei verschoben werden.
+- Prognose wie Abschnitt 9, mit der gewählten Sparrate und Rendite (`rechnePrognose`).
+- Überschuss = Gehalt − Ausgaben. Ist die Sparrate höher, zeigt die App den Rest als „aus dem Tagesgeld“.
+- Die Regler werden nicht gespeichert (Spielwiese).
+
+Abnahme mit Alex: ohne Änderung Dez 2034 (= realistisch); Ausgaben 2.495 € → Sparrate 525 € → Nov 2033 (= Schritt „auswärts essen halbieren“); Rendite 7 % → Dez 2033 (= optimistisch); Sparrate 800 € → 380 € aus dem Tagesgeld.

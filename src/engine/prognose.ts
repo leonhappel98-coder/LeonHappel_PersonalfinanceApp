@@ -17,7 +17,8 @@ export type Ziel = {
 }
 
 export type Prognose = {
-  szenario: Szenario
+  /** „eigene“ = mit frei gewählter Rendite (Was wäre, wenn …?) */
+  szenario: Szenario | 'eigene'
   rendite: number
   /** Nettovermögen je Monat, beginnend mit dem Startmonat */
   verlauf: { monat: string; wert: number }[]
@@ -55,7 +56,17 @@ export function fortschritt(ziel: Ziel): number {
  * Das Tagesgeld bleibt gleich. Der Verlauf reicht bis `mindestensBis` (oder bis zum Ziel, falls später).
  */
 export function berechnePrognose(ziel: Ziel, startMonat: string, szenario: Szenario, mindestensBis?: string): Prognose {
-  const rendite = SZENARIO_RENDITE[szenario]
+  return rechnePrognose(ziel, startMonat, SZENARIO_RENDITE[szenario], szenario, mindestensBis)
+}
+
+/** Wie berechnePrognose, aber mit beliebiger Jahresrendite (0,05 = 5 %). */
+export function rechnePrognose(
+  ziel: Ziel,
+  startMonat: string,
+  rendite: number,
+  szenario: Prognose['szenario'] = 'eigene',
+  mindestensBis?: string,
+): Prognose {
   const monatsrendite = (1 + rendite) ** (1 / 12) - 1
   const maxMonate = PROGNOSE_MAX_JAHRE * 12
   const bisMindestens = mindestensBis ? Math.min(monateZwischen(startMonat, mindestensBis), maxMonate) : 0
