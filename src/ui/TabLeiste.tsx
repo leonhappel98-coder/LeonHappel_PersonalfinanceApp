@@ -1,10 +1,11 @@
-import { IconHeute, IconPrognose } from './Bausteine'
+import { IconHeute, IconPrognose, IconSchritte } from './Bausteine'
 
-export type Tab = 'heute' | 'prognose'
+export type Tab = 'heute' | 'schritte' | 'prognose'
 
-/** Untere Leiste wie im Design. Weitere Tabs (Schritte, Budgets, Daten) kommen in späteren Phasen. */
+/** Untere Leiste wie im Design. Weitere Tabs (Budgets, Daten) kommen in späteren Phasen. */
 const TABS: { id: Tab; name: string; Icon: () => React.JSX.Element }[] = [
   { id: 'heute', name: 'Heute', Icon: IconHeute },
+  { id: 'schritte', name: 'Schritte', Icon: IconSchritte },
   { id: 'prognose', name: 'Prognose', Icon: IconPrognose },
 ]
 

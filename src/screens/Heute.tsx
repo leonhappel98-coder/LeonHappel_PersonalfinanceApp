@@ -1,14 +1,16 @@
 import { formatEuro, formatProzent } from '../engine/format'
-import { berechnePrognose, fortschritt, nettovermoegen, type Ziel } from '../engine/prognose'
+import { fortschritt, nettovermoegen, type Ziel } from '../engine/prognose'
+import type { Schrittplan } from '../engine/schritte'
 import type { Analyse } from '../engine/typen'
 import { DemoLabel, IconZahnrad } from '../ui/Bausteine'
 import { TabLeiste, type Tab } from '../ui/TabLeiste'
-import { aktuellerMonat, begruessung, kurzEuro, monatJahr, monatJahrLang } from '../ui/texte'
+import { begruessung, dauer, kurzEuro, monatJahr, monatJahrLang } from '../ui/texte'
 import './screens.css'
 
 type Props = {
   analyse: Analyse
   ziel: Ziel
+  plan: Schrittplan
   istDemo: boolean
   onTab: (tab: Tab) => void
   onEinstellungen: () => void
@@ -17,10 +19,13 @@ type Props = {
 
 const UMFANG = 2 * Math.PI * 52
 
-export function Heute({ analyse, ziel, istDemo, onTab, onEinstellungen, onAuswertung }: Props) {
+export function Heute({ analyse, ziel, plan, istDemo, onTab, onEinstellungen, onAuswertung }: Props) {
   const anteil = fortschritt(ziel)
-  const prognose = berechnePrognose(ziel, aktuellerMonat(), 'realistisch')
+  const prognose = plan.soWieJetzt
   const puenktlich = prognose.monateNachZiel !== null && prognose.monateNachZiel <= 0
+  const mitSchritten = plan.mitAllenSchritten.zielErreicht
+  const offen = plan.schritte.filter((s) => !s.erledigt)
+  const naechster = offen.find((s) => s.plusProMonat !== null) ?? offen[0]
 
   return (
     <main className="seite mit-tableiste heute">
@@ -70,8 +75,27 @@ export function Heute({ analyse, ziel, istDemo, onTab, onEinstellungen, onAuswer
           <p className={puenktlich ? 'heute__prognose gut' : 'heute__prognose warnung'}>
             {prognose.zielErreicht ? `Prognose: ${monatJahr(prognose.zielErreicht)}` : 'Prognose: nicht in 50 Jahren'}
           </p>
+          {mitSchritten && mitSchritten !== prognose.zielErreicht && (
+            <p className="heute__mit-schritten gut">Mit allen Schritten: {monatJahr(mitSchritten)}</p>
+          )}
         </div>
       </section>
+
+      {naechster && (
+        <button type="button" className="heute__naechster" onClick={() => onTab('schritte')}>
+          <span className="heute__naechster-kopf">
+            <span className="heute__naechster-tag">NÄCHSTER SCHRITT</span>
+            <span className="schritte__aufwand">{naechster.aufwand}</span>
+          </span>
+          <span className="heute__naechster-titel">{naechster.titel}</span>
+          {naechster.plusProMonat !== null && (
+            <span className="heute__naechster-wirkung">
+              <span className="zahl gut">+{formatEuro(naechster.plusProMonat, 'ganz')}/Monat</span>
+              {naechster.monateFrueher !== null && naechster.monateFrueher > 0 && <span>Ziel {dauer(naechster.monateFrueher)} früher</span>}
+            </span>
+          )}
+        </button>
+      )}
 
       <section aria-label="Aus deiner Auswertung">
         <div className="heute__kacheln">

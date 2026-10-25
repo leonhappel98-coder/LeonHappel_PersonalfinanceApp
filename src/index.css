@@ -30,6 +30,12 @@
   --warnung-flaeche: rgba(229, 83, 75, 0.16);
   --hinweis: #e3b862;
   --hinweis-flaeche: rgba(212, 162, 76, 0.16);
+  --hinweis-stark: #d4a24c;
+  --hinweis-rand: rgba(212, 162, 76, 0.65);
+  --ausgaben: #a9c8e6;
+  --ausgaben-stark: #8ab4d9;
+  --ausgaben-flaeche: rgba(138, 180, 217, 0.16);
+  --ausgaben-rand: rgba(138, 180, 217, 0.55);
   --balken-grau: #6b6862;
   /* Etwas heller als im Design, damit der Kontrast mindestens 4.5:1 erreicht */
   --text-platzhalter: #86827a;

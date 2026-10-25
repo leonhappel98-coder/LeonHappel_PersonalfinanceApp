@@ -153,7 +153,7 @@
   bottom: 0;
   z-index: 2;
   display: grid;
-  grid-template-columns: repeat(2, 78px);
+  grid-template-columns: repeat(3, 78px);
   justify-content: space-evenly;
   padding: 8px 6px calc(env(safe-area-inset-bottom) + 12px);
   background: rgba(31, 30, 29, 0.97);

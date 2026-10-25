@@ -1,6 +1,7 @@
 // Speichert Auswertung und Ziel lokal im Browser (IndexedDB). Nichts verlässt das Gerät.
 import { del, get, set } from 'idb-keyval'
 import type { Ziel } from '../engine/prognose'
+import type { SchrittId } from '../engine/schritte'
 import type { Analyse } from '../engine/typen'
 
 const SCHLUESSEL = 'kurs-zustand'
@@ -12,6 +13,8 @@ export type Gespeichert = {
   istDemo: boolean
   schaetzung: number | null
   ziel?: Ziel
+  /** Abgehakte nächste Schritte */
+  erledigt?: SchrittId[]
 }
 
 /** Liest den gespeicherten Stand. Ohne Speicher (z. B. privates Surfen) einfach nichts. */

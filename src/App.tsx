@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import beispielUrl from '../testdata/kontoexport_alex_finanzguru.xlsx?url'
 import type { Ziel as ZielDaten } from './engine/prognose'
+import { erstelleSchrittplan, type SchrittId } from './engine/schritte'
 import type { Analyse as AnalyseErgebnis } from './engine/typen'
 import { leseBetrag } from './engine/zahlen'
 import { Analyse } from './screens/Analyse'
 import { Ergebnis } from './screens/Ergebnis'
 import { Heute } from './screens/Heute'
 import { Prognose } from './screens/Prognose'
+import { Schritte } from './screens/Schritte'
 import { Start } from './screens/Start'
 import { Ziel } from './screens/Ziel'
-import { ladeZustand, loescheAlles, speichereZustand } from './storage/speicher'
+import { ladeZustand, loescheAlles, speichereZustand, type Gespeichert } from './storage/speicher'
+import { aktuellerMonat } from './ui/texte'
 
-type Screen = 'start' | 'analyse' | 'ergebnis' | 'ziel' | 'heute' | 'prognose'
+type Screen = 'start' | 'analyse' | 'ergebnis' | 'ziel' | 'heute' | 'schritte' | 'prognose'
 
 const BEISPIEL_NAME = 'kontoexport_alex_finanzguru.xlsx'
 
@@ -22,6 +25,7 @@ export default function App() {
   const [dateiname, setDateiname] = useState('')
   const [analyse, setAnalyse] = useState<AnalyseErgebnis | null>(null)
   const [ziel, setZiel] = useState<ZielDaten>()
+  const [erledigt, setErledigt] = useState<SchrittId[]>([])
   const [istDemo, setIstDemo] = useState(false)
   const [fehler, setFehler] = useState<string>()
 
@@ -34,6 +38,7 @@ export default function App() {
         setIstDemo(zustand.istDemo)
         setSchaetzungText(zustand.schaetzung ? new Intl.NumberFormat('de-DE').format(zustand.schaetzung) : '')
         setZiel(zustand.ziel)
+        setErledigt(zustand.erledigt ?? [])
         const ziel: Screen = zustand.ziel ? 'heute' : 'ergebnis'
         window.history.replaceState({ screen: ziel }, '')
         setScreen(ziel)
@@ -60,6 +65,17 @@ export default function App() {
 
   const schaetzung = leseSchaetzung(schaetzungText)
 
+  // Nächste Schritte und Prognose „so wie jetzt“ (mit erledigten Schritten)
+  const plan = useMemo(
+    () => (analyse && ziel ? erstelleSchrittplan(analyse, ziel, erledigt, aktuellerMonat()) : undefined),
+    [analyse, ziel, erledigt],
+  )
+
+  /** Speichert den aktuellen Stand, mit den übergebenen Änderungen. */
+  function sichere(aenderung: Partial<Gespeichert> & Pick<Gespeichert, 'analyse'>) {
+    speichereZustand({ version: 1, dateiname, istDemo, schaetzung, ziel, erledigt, ...aenderung })
+  }
+
   /** Liest die Datei auf dem Gerät und rechnet. Der Rechenkern wird erst jetzt geladen. */
   async function werteAus(name: string, ladeDaten: () => Promise<ArrayBuffer>, demo: boolean) {
     setFehler(undefined)
@@ -72,7 +88,7 @@ export default function App() {
       const ergebnis = analysiereDatei(daten)
       if (ergebnis.anzahl.buchungen === 0) throw new Error('keine Buchungen')
       setAnalyse(ergebnis)
-      speichereZustand({ version: 1, analyse: ergebnis, dateiname: name, istDemo: demo, schaetzung, ziel })
+      sichere({ analyse: ergebnis, dateiname: name, istDemo: demo })
     } catch (e) {
       setFehler(fehlertext(e))
       setIstDemo(false)
@@ -83,14 +99,22 @@ export default function App() {
   function zielSpeichern(neu: ZielDaten) {
     if (!analyse) return
     setZiel(neu)
-    speichereZustand({ version: 1, analyse, dateiname, istDemo, schaetzung, ziel: neu })
+    sichere({ analyse, ziel: neu })
     gehe('heute')
+  }
+
+  function schrittUmschalten(id: SchrittId) {
+    if (!analyse) return
+    const neu = erledigt.includes(id) ? erledigt.filter((e) => e !== id) : [...erledigt, id]
+    setErledigt(neu)
+    sichere({ analyse, erledigt: neu })
   }
 
   async function allesLoeschen() {
     await loescheAlles()
     setAnalyse(null)
     setZiel(undefined)
+    setErledigt([])
     setIstDemo(false)
     setSchaetzungText('')
     setDateiname('')
@@ -140,11 +164,12 @@ export default function App() {
     )
   }
 
-  if (analyse && ziel && screen === 'heute') {
+  if (analyse && ziel && plan && screen === 'heute') {
     return (
       <Heute
         analyse={analyse}
         ziel={ziel}
+        plan={plan}
         istDemo={istDemo}
         onTab={gehe}
         onEinstellungen={() => gehe('ziel')}
@@ -153,8 +178,22 @@ export default function App() {
     )
   }
 
-  if (ziel && screen === 'prognose') {
-    return <Prognose ziel={ziel} istDemo={istDemo} onTab={gehe} />
+  if (analyse && ziel && plan && screen === 'schritte') {
+    return (
+      <Schritte
+        analyse={analyse}
+        ziel={ziel}
+        plan={plan}
+        istDemo={istDemo}
+        onUmschalten={(schritt) => schrittUmschalten(schritt.id)}
+        onTab={gehe}
+      />
+    )
+  }
+
+  if (ziel && plan && screen === 'prognose') {
+    // Erledigte Schritte erhöhen die Sparrate ins Depot.
+    return <Prognose ziel={{ ...ziel, sparrateProMonat: plan.sparrateJetzt }} istDemo={istDemo} onTab={gehe} />
   }
 
   return (
