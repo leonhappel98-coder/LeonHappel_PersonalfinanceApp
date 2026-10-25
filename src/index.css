@@ -6,24 +6,26 @@
 @import '@fontsource/ibm-plex-sans/latin-600.css';
 @import '@fontsource/ibm-plex-mono/latin-400.css';
 
-/* Design-Tokens aus CLAUDE.md – Farben, Schriften und Radien nur hier festlegen. */
+/* Design-Tokens – Farben, Schriften und Radien nur hier festlegen. Blau wie Leons YouTube-Kanal. */
 :root {
-  --hintergrund: #1f1e1d;
-  --flaeche: #2b2a27;
-  --flaeche-hervorgehoben: #30302d;
-  --flaeche-eingabe: #1a1918;
-  --rand: rgba(250, 249, 245, 0.1);
-  --rand-eingabe: #55524c;
-  --linie: #3d3c38;
+  --hintergrund: #0e1628;
+  --hintergrund-rgb: 14, 22, 40;
+  --flaeche: #16213a;
+  --flaeche-hervorgehoben: #1b2846;
+  --flaeche-eingabe: #0a1120;
+  --rand: rgba(226, 234, 255, 0.1);
+  --rand-eingabe: #3b4a6b;
+  --linie: #2a3756;
 
-  --text: #f5f4ee;
-  --text-zweitrangig: #d6d3ca;
-  --text-gedaempft: #a5a198;
+  --text: #f1f5fd;
+  --text-zweitrangig: #cbd5e8;
+  --text-gedaempft: #97a5c2;
 
-  --akzent: #d97757;
-  --akzent-text: #e58b6d;
-  --akzent-rand: rgba(217, 119, 87, 0.55);
-  --akzent-flaeche: #3b2c26;
+  --akzent: #4c8dff;
+  --akzent-rgb: 76, 141, 255;
+  --akzent-text: #8db6ff;
+  --akzent-rand: rgba(var(--akzent-rgb), 0.55);
+  --akzent-flaeche: #1d3360;
   --gut: #8fbf8a;
   --warnung: #f28b82;
   --warnung-balken: #e5534b;
@@ -32,14 +34,14 @@
   --hinweis-flaeche: rgba(212, 162, 76, 0.16);
   --hinweis-stark: #d4a24c;
   --hinweis-rand: rgba(212, 162, 76, 0.65);
-  --ausgaben: #a9c8e6;
-  --ausgaben-stark: #8ab4d9;
-  --ausgaben-flaeche: rgba(138, 180, 217, 0.16);
-  --ausgaben-rand: rgba(138, 180, 217, 0.55);
-  --balken-grau: #6b6862;
+  --ausgaben: #c9bcff;
+  --ausgaben-stark: #ab97fb;
+  --ausgaben-flaeche: rgba(171, 151, 251, 0.16);
+  --ausgaben-rand: rgba(171, 151, 251, 0.55);
+  --balken-grau: #5d6b8a;
   /* Etwas heller als im Design, damit der Kontrast mindestens 4.5:1 erreicht */
-  --text-platzhalter: #86827a;
-  --text-inaktiv: #b3afa6;
+  --text-platzhalter: #7f8dab;
+  --text-inaktiv: #aeb9d0;
 
   --schrift-serif: 'Source Serif 4', Georgia, serif;
   --schrift-text: 'IBM Plex Sans', system-ui, sans-serif;

@@ -132,7 +132,7 @@
   z-index: 1;
   margin: auto -24px calc(-1 * (env(safe-area-inset-bottom) + 40px));
   padding: 18px 24px calc(env(safe-area-inset-bottom) + 40px);
-  background: linear-gradient(to bottom, rgba(31, 30, 29, 0), var(--hintergrund) 18px);
+  background: linear-gradient(to bottom, rgba(var(--hintergrund-rgb), 0), var(--hintergrund) 18px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -156,7 +156,7 @@
   grid-template-columns: repeat(3, 78px);
   justify-content: space-evenly;
   padding: 8px 6px calc(env(safe-area-inset-bottom) + 12px);
-  background: rgba(31, 30, 29, 0.97);
+  background: rgba(var(--hintergrund-rgb), 0.97);
   border-top: 1px solid var(--linie);
 }
 

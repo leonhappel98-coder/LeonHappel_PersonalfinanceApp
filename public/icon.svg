@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <!-- Kleiner Löwe für „Löwen Finance“ (Leon = Löwe). Farben aus dem Design. -->
-  <rect width="512" height="512" fill="#1f1e1d"/>
+  <rect width="512" height="512" fill="#0e1628"/>
   <!-- Mähne: gezackter Kranz aus Kreisen -->
-  <g fill="#d97757">
+  <g fill="#4c8dff">
     <circle cx="256" cy="262" r="178"/>
     <circle cx="256" cy="92" r="58"/>
     <circle cx="376" cy="142" r="58"/>
@@ -13,7 +13,7 @@
     <circle cx="86" cy="262" r="58"/>
     <circle cx="136" cy="142" r="58"/>
   </g>
-  <g fill="#b8603f">
+  <g fill="#2f6be0">
     <circle cx="316" cy="104" r="40"/>
     <circle cx="414" cy="202" r="40"/>
     <circle cx="414" cy="322" r="40"/>
@@ -23,23 +23,23 @@
     <circle cx="98" cy="202" r="40"/>
     <circle cx="196" cy="104" r="40"/>
   </g>
-  <circle cx="256" cy="262" r="150" fill="#d97757"/>
+  <circle cx="256" cy="262" r="150" fill="#4c8dff"/>
   <!-- Ohren -->
-  <circle cx="172" cy="168" r="34" fill="#f5f4ee"/>
-  <circle cx="340" cy="168" r="34" fill="#f5f4ee"/>
-  <circle cx="172" cy="168" r="17" fill="#e8a283"/>
-  <circle cx="340" cy="168" r="17" fill="#e8a283"/>
+  <circle cx="172" cy="168" r="34" fill="#f1f5fd"/>
+  <circle cx="340" cy="168" r="34" fill="#f1f5fd"/>
+  <circle cx="172" cy="168" r="17" fill="#9cc0ff"/>
+  <circle cx="340" cy="168" r="17" fill="#9cc0ff"/>
   <!-- Gesicht -->
-  <ellipse cx="256" cy="272" rx="118" ry="112" fill="#f5f4ee"/>
+  <ellipse cx="256" cy="272" rx="118" ry="112" fill="#f1f5fd"/>
   <!-- Schnauze -->
   <ellipse cx="226" cy="318" rx="40" ry="32" fill="#ffffff"/>
   <ellipse cx="286" cy="318" rx="40" ry="32" fill="#ffffff"/>
   <!-- Augen -->
-  <circle cx="212" cy="250" r="17" fill="#1f1e1d"/>
-  <circle cx="300" cy="250" r="17" fill="#1f1e1d"/>
+  <circle cx="212" cy="250" r="17" fill="#0e1628"/>
+  <circle cx="300" cy="250" r="17" fill="#0e1628"/>
   <circle cx="218" cy="244" r="5" fill="#ffffff"/>
   <circle cx="306" cy="244" r="5" fill="#ffffff"/>
   <!-- Nase und Mund -->
-  <path d="M232 288 h48 a8 8 0 0 1 6 13 l-22 22 a11 11 0 0 1 -16 0 l-22 -22 a8 8 0 0 1 6 -13z" fill="#1f1e1d"/>
-  <path d="M256 326 v14 M256 340 q-16 16 -32 6 M256 340 q16 16 32 6" fill="none" stroke="#1f1e1d" stroke-width="9" stroke-linecap="round"/>
+  <path d="M232 288 h48 a8 8 0 0 1 6 13 l-22 22 a11 11 0 0 1 -16 0 l-22 -22 a8 8 0 0 1 6 -13z" fill="#0e1628"/>
+  <path d="M256 326 v14 M256 340 q-16 16 -32 6 M256 340 q16 16 32 6" fill="none" stroke="#0e1628" stroke-width="9" stroke-linecap="round"/>
 </svg>

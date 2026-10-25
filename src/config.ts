@@ -6,6 +6,9 @@ export const APP_NAME = 'Löwen Finance'
 /** Wird oben auf dem Start-Screen als „by …“ gezeigt. */
 export const APP_AUTOR = 'Leon Happel'
 
+/** Hintergrundfarbe für Home-Bildschirm, Startbild und Browser-Leiste (wie --hintergrund in index.css). */
+export const APP_HINTERGRUND = '#0e1628'
+
 /** Kurzbeschreibung für den Home-Bildschirm und die Suche. */
 export const APP_BESCHREIBUNG = 'Zeigt aus deinem Kontoexport, wohin dein Geld geht. Alles bleibt auf deinem Gerät.'
 

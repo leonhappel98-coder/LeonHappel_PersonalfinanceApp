@@ -49,16 +49,17 @@ docs/                  RECHENKERN.md, ROADMAP.md, design/
 
 ## Design
 
-Vorlage: `docs/design/screens/*.png` und die klickbare Demo `docs/design/klick-demo.html`. Nachbauen, nicht neu erfinden.
+Vorlage: `docs/design/screens/*.png` und die klickbare Demo `docs/design/klick-demo.html`. Aufbau und Abstände nachbauen, nicht neu erfinden. Farben: Die Vorlage ist noch braun/orange, die App ist seit Phase 3 blau (Tabelle unten, Werte in `src/index.css`).
 
 | Token | Wert |
 | --- | --- |
-| Hintergrund | `#1f1e1d` |
-| Fläche / Karte | `#2b2a27`, hervorgehoben `#30302d` |
-| Rand | `rgba(250,249,245,0.10)`, Linien/Balkenspur `#3d3c38` |
-| Text | `#f5f4ee`, zweitrangig `#d6d3ca`, gedämpft `#a5a198` |
-| Akzent | `#D97757` (Buttons, aktiver Tab, Balken) |
+| Hintergrund | `#0e1628` (Dunkelblau, wie Leons YouTube-Kanal) |
+| Fläche / Karte | `#16213a`, hervorgehoben `#1b2846` |
+| Rand | `rgba(226,234,255,0.10)`, Linien/Balkenspur `#2a3756` |
+| Text | `#f1f5fd`, zweitrangig `#cbd5e8`, gedämpft `#97a5c2` |
+| Akzent | `#4c8dff` (Buttons, aktiver Tab, Balken), als Text `#8db6ff` |
 | Gut / Warnung / Hinweis | `#8fbf8a` / `#f28b82` (Balken `#e5534b`) / `#e3b862` |
+| Ausgaben-Schritte | Lavendel `#c9bcff` |
 | Schriften | Überschriften und große Zahlen: Source Serif 4 (600). Text: IBM Plex Sans. Kleine Labels in Großbuchstaben: IBM Plex Mono |
 | Radien | Karten 18–22 px, Buttons 14–16 px, Chips rund |
 

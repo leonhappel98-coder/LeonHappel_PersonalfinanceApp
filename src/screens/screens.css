@@ -10,8 +10,8 @@
   height: 790px;
   transform: translateX(-50%);
   border-radius: 50%;
-  border: 1.5px solid rgba(217, 119, 87, 0.45);
-  box-shadow: 0 14px 48px rgba(217, 119, 87, 0.22);
+  border: 1.5px solid rgba(var(--akzent-rgb), 0.45);
+  box-shadow: 0 14px 48px rgba(var(--akzent-rgb), 0.22);
   pointer-events: none;
 }
 
@@ -542,8 +542,8 @@
   height: 910px;
   transform: translateX(-50%);
   border-radius: 50%;
-  border: 1.5px solid rgba(217, 119, 87, 0.55);
-  box-shadow: 0 12px 40px rgba(217, 119, 87, 0.22);
+  border: 1.5px solid rgba(var(--akzent-rgb), 0.55);
+  box-shadow: 0 12px 40px rgba(var(--akzent-rgb), 0.22);
   pointer-events: none;
 }
 
@@ -747,7 +747,7 @@
 }
 
 .diagramm__flaeche {
-  fill: rgba(217, 119, 87, 0.14);
+  fill: rgba(var(--akzent-rgb), 0.14);
 }
 
 .diagramm__gewaehlt {
@@ -1073,9 +1073,9 @@
   gap: 8px;
   padding: 16px 18px;
   border-radius: 20px;
-  border: 1.5px solid rgba(217, 119, 87, 0.6);
+  border: 1.5px solid rgba(var(--akzent-rgb), 0.6);
   background: var(--flaeche);
-  box-shadow: 0 0 28px -12px rgba(217, 119, 87, 0.8);
+  box-shadow: 0 0 28px -12px rgba(var(--akzent-rgb), 0.8);
   text-align: left;
 }
 
