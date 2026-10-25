@@ -3,6 +3,9 @@
 /** Name der App (Arbeitsname, wird evtl. „Personal Finance“). */
 export const APP_NAME = 'Kurs'
 
+/** Wird oben auf dem Start-Screen als „by …“ gezeigt. */
+export const APP_AUTOR = 'Leon Happel'
+
 /** Kurzbeschreibung für den Home-Bildschirm und die Suche. */
 export const APP_BESCHREIBUNG = 'Zeigt aus deinem Kontoexport, wohin dein Geld geht. Alles bleibt auf deinem Gerät.'
 

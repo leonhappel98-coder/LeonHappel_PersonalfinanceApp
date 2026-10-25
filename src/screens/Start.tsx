@@ -1,5 +1,5 @@
 import { useRef, useState, type DragEvent } from 'react'
-import { APP_NAME } from '../config'
+import { APP_AUTOR, APP_NAME } from '../config'
 import { DemoLabel, IconDatei, IconSchloss } from '../ui/Bausteine'
 import { deinGeraet } from '../ui/texte'
 import './screens.css'
@@ -29,7 +29,9 @@ export function Start({ schaetzung, setSchaetzung, onDatei, onBeispiel, istDemo,
       <div className="start__bogen" aria-hidden="true" />
 
       <header className="kopfzeile">
-        <p className="start__name">{APP_NAME}</p>
+        <p className="start__name">
+          {APP_NAME} <span className="start__autor">by {APP_AUTOR}</span>
+        </p>
         {istDemo && <DemoLabel />}
       </header>
 

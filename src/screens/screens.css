@@ -22,6 +22,15 @@
   letter-spacing: -0.3px;
 }
 
+.start__autor {
+  margin-left: 4px;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0;
+  color: var(--text-gedaempft);
+}
+
 .start__intro {
   display: flex;
   flex-direction: column;
